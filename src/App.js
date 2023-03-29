@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./style.scss";
-import Home from "./pages/Home";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 // pages
+import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import AddEditBlog from "./pages/AddEditBlog";
 import About from "./pages/About";
@@ -52,8 +52,22 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/create" element={<AddEditBlog />} />
-        <Route path="/update/:id" element={<AddEditBlog />} />
+        <Route
+          path="/create"
+          element={
+            user?.uid ? <AddEditBlog user={user} /> : <Navigate to="/" />
+          }
+        />
+        <Route
+          path="/update/:id"
+          element={
+            user?.uid ? (
+              <AddEditBlog user={user} setActive={setActive} />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
         <Route path="/about" element={<About />} />
         <Route
           path="/auth"
