@@ -43,9 +43,112 @@ img {
 body {
   font-family: "Poppins", sans-serif;
   background-color: var(--clr-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .navbar-light .navbar-nav .open > .nav-link,
+  .navbar-light .navbar-nav .active > .nav-link,
+  .navbar-light .navbar-nav .nav-link.open,
+  .navbar-light .navbar-nav .nav-link.active {
+    -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
+  }
+  .navbar-light .navbar-nav .nav-link {
+    -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
+  }
+  .navbar-nav {
+    flex-direction: column !important;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .trending-img-size {
+    height: 226px;
+  }
+
+  .trending-img-size > img {
+    height: 240px;
+  }
+
+  .trending-img-relative {
+    right: 0;
+  }
+
+  .navbar-light .navbar-nav .open > .nav-link,
+  .navbar-light .navbar-nav .active > .nav-link,
+  .navbar-light .navbar-nav .nav-link.open,
+  .navbar-light .navbar-nav .nav-link.active {
+    -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
+  }
+  .navbar-light .navbar-nav .nav-link {
+    -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
+  }
+
+  .navbar-nav {
+    flex-direction: column !important;
+    margin-top: 15px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .navbar-light .navbar-nav .open > .nav-link,
+  .navbar-light .navbar-nav .active > .nav-link,
+  .navbar-light .navbar-nav .nav-link.open,
+  .navbar-light .navbar-nav .nav-link.active {
+    -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
+  }
+  .navbar-light .navbar-nav .nav-link {
+    -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
+  }
+
+  .navbar-nav {
+    flex-direction: column !important;
+    margin-top: 15px;
+  }
 }
