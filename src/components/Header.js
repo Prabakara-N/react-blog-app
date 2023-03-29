@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const Header = ({ active, setActive, user, handleLogout }) => {
   const userId = user?.uid;
-  console.log(userId);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid bg-faded padding-media">
