@@ -41,7 +41,8 @@ img {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Poppins";
+  line-height: 1.5;
   background-color: var(--clr-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
