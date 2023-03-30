@@ -68,6 +68,7 @@ const AddEditBlog = ({ user, setActive }) => {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadUrl) => {
+            toast.info("Image Uploaded to Firebase Successfully");
             setForm((prev) => ({ ...prev, imgUrl: downloadUrl }));
           });
         }
@@ -76,6 +77,19 @@ const AddEditBlog = ({ user, setActive }) => {
 
     file && uploadFile();
   }, [file]);
+
+  useEffect(() => {
+    id && getBlockDetails();
+  }, [id]);
+
+  const getBlockDetails = async () => {
+    const docRef = doc(db, "blogs", id);
+    const snapshot = await getDoc(docRef);
+    if (snapshot.exists()) {
+      setForm({ ...snapshot.data() });
+    }
+    setActive(null);
+  };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -95,18 +109,34 @@ const AddEditBlog = ({ user, setActive }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (title && tags && title && file && description && trending) {
-      try {
-        await addDoc(collection(db, "blogs"), {
-          ...form,
-          timestamp: serverTimestamp(),
-          author: user.displayName,
-          userId: user.uid,
-        });
-      } catch (error) {
-        console.log(error);
+    if (title && tags && title && description && trending) {
+      if (!id) {
+        try {
+          await addDoc(collection(db, "blogs"), {
+            ...form,
+            timestamp: serverTimestamp(),
+            author: user.displayName,
+            userId: user.uid,
+          });
+          toast.success("Blog Created Successfully");
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        try {
+          await updateDoc(doc(db, "blogs", id), {
+            ...form,
+            timestamp: serverTimestamp(),
+            author: user.displayName,
+            userId: user.uid,
+          });
+          toast.success("Blog Updated Successfully");
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
+    return toast.error("All fileds are mandatory to fill");
     navigate("/");
   };
 
