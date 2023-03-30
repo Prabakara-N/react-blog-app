@@ -137,7 +137,6 @@ const AddEditBlog = ({ user, setActive }) => {
         }
       }
     }
-    return toast.error("All fileds are mandatory to fill");
     navigate("/");
   };
 
