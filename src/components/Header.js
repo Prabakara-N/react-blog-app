@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { transitions } from "bootstrap";
+// import { transitions } from "bootstrap";
 import { MdOutlineLogout } from "react-icons/md";
 
 const Header = ({ active, setActive, user, handleLogout }) => {
