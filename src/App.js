@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./style.scss";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// routes
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 // pages
 import Home from "./pages/Home";
@@ -11,8 +12,12 @@ import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import Blogs from "./pages/Blogs";
+import TagBlog from "./pages/TagBlog";
+import CategoryBlog from "./pages/CategoryBlog";
 // components
 import Header from "./components/Header";
+import ScrollToTop from "./components/ScrollToTop";
+// fire base
 import { auth } from "./firebase/firebase";
 import { signOut } from "firebase/auth";
 
@@ -42,18 +47,22 @@ const App = () => {
   return (
     <div className="App">
       <Header
-        active={active}
         setActive={setActive}
+        active={active}
         user={user}
         handleLogout={handleLogout}
       />
+      <ScrollToTop />
       <ToastContainer position="top-center" />
       <Routes>
         <Route
           path="/"
-          element={<Home active={active} setActive={setActive} user={user} />}
+          element={<Home setActive={setActive} active={active} user={user} />}
         />
-        <Route path="/blogs" element={<Blogs />} />
+        <Route
+          path="/search"
+          element={<Home setActive={setActive} user={user} />}
+        />
         <Route
           path="/detail/:id"
           element={<Detail setActive={setActive} user={user} />}
@@ -73,6 +82,12 @@ const App = () => {
               <Navigate to="/" />
             )
           }
+        />
+        <Route path="/blogs" element={<Blogs setActive={setActive} />} />
+        <Route path="/tag/:tag" element={<TagBlog setActive={setActive} />} />
+        <Route
+          path="/category/:category"
+          element={<CategoryBlog setActive={setActive} />}
         />
         <Route path="/about" element={<About />} />
         <Route

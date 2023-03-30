@@ -5,28 +5,27 @@ import BlogSection from "../components/BlogSection";
 import Spinner from "../components/Spinner";
 import { db } from "../firebase/firebase";
 
-const TagBlog = ({ setActive }) => {
-  const [tagBlogs, setTagBlogs] = useState([]);
+const CategoryBlog = ({ setActive }) => {
+  const [categoryBlogs, setCategoryBlogs] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { tag } = useParams();
+  const { category } = useParams();
 
-  const getTagBlogs = async () => {
+  const getCategoryBlogs = async () => {
     setLoading(true);
     const blogRef = collection(db, "blogs");
-    const tagBlogQuery = query(blogRef, where("tags", "array-contains", tag));
-    const docSnapshot = await getDocs(tagBlogQuery);
-    let tagBlogs = [];
+    const categoryBlogQuery = query(blogRef, where("category", "==", category));
+    const docSnapshot = await getDocs(categoryBlogQuery);
+    let categoryBlogs = [];
     docSnapshot.forEach((doc) => {
-      tagBlogs.push({ id: doc.id, ...doc.data() });
+      categoryBlogs.push({ id: doc.id, ...doc.data() });
     });
-    setTagBlogs(tagBlogs);
+    setCategoryBlogs(categoryBlogs);
     setLoading(false);
   };
 
   useEffect(() => {
-    getTagBlogs();
+    getCategoryBlogs();
     setActive(null);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {
@@ -38,9 +37,9 @@ const TagBlog = ({ setActive }) => {
       <div className="container">
         <div className="row">
           <div className="blog-heading text-center py-2 mb-4">
-            Tag: <strong>{tag.toLocaleUpperCase()}</strong>
+            Category: <strong>{category.toLocaleUpperCase()}</strong>
           </div>
-          {tagBlogs?.map((item) => (
+          {categoryBlogs?.map((item) => (
             <div className="col-md-6">
               <BlogSection key={item.id} {...item} />
             </div>
@@ -51,4 +50,4 @@ const TagBlog = ({ setActive }) => {
   );
 };
 
-export default TagBlog;
+export default CategoryBlog;
