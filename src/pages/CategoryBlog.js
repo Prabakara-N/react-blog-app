@@ -29,6 +29,7 @@ const CategoryBlog = ({ setActive }) => {
   useEffect(() => {
     getCategoryBlogs();
     setActive(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {

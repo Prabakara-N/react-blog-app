@@ -156,6 +156,7 @@ const Home = ({ setActive, user, active }) => {
     if (!isNull(searchQuery)) {
       searchBlogs();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   if (loading) {

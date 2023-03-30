@@ -30,6 +30,7 @@ const Blogs = ({ setActive }) => {
     getBlogsData();
     getTotalBlogs();
     setActive("blogs");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {
