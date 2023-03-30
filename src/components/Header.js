@@ -89,7 +89,10 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                       <p style={{ marginTop: "12px", marginLeft: "5px" }}>
                         {user?.displayName}
                       </p>
-                      <li className="nav-item nav-link" onClick={handleLogout}>
+                      <li
+                        className="nav-item nav-link fw-bold"
+                        onClick={handleLogout}
+                      >
                         Logout
                         <MdOutlineLogout
                           style={{
@@ -103,7 +106,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                       <li
                         className={`nav-item nav-link ${
                           active === "login" ? "active" : ""
-                        }`}
+                        } fw-bold`}
                         onClick={() => setActive("login")}
                       >
                         Login

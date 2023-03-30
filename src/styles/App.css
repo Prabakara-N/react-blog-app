@@ -133,6 +133,7 @@ body {
   .navbar-light .navbar-nav .nav-link {
     -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
     clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
+    border-radius: 5px;
   }
   .navbar-nav {
     flex-direction: column !important;
@@ -162,6 +163,8 @@ body {
   .navbar-light .navbar-nav .nav-link {
     -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
     clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
+    display: inline-block;
+    border-radius: 5px;
   }
 
   .navbar-nav {
@@ -181,16 +184,12 @@ body {
   .navbar-light .navbar-nav .nav-link {
     -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
     clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%) !important;
+    border-radius: 5px;
   }
 
   .navbar-nav {
     flex-direction: column !important;
     margin-top: 15px;
-  }
-
-  .error {
-    width: 50%;
-    height: 100vh;
   }
 }
 
