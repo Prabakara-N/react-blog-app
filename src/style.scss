@@ -54,7 +54,7 @@ $yellow: #f5bc04;
   padding-right: 20px !important;
   margin: 0 20px !important;
   @include transition(0.5s);
-  background: $yellow !important;
+  background: #2b3945 !important;
   @include clip-path(polygon(100% 0, 100% 85%, 14% 85%, 0 100%, 0% 60%, 0 0));
 }
 .navbar-light .navbar-nav .nav-link {
@@ -70,7 +70,7 @@ $yellow: #f5bc04;
 
   &:focus,
   &:hover {
-    background: $yellow !important;
+    background: #2b3945 !important;
     color: #fff !important;
     padding-top: 12px !important;
     padding-bottom: 15px !important;
@@ -114,7 +114,7 @@ $yellow: #f5bc04;
 }
 
 .btn-sign-in {
-  background: #c43421 !important;
+  background: #03256c !important;
   @include border-radius(0!important);
   color: #fff !important;
   padding: 10px 50px !important;
@@ -142,10 +142,10 @@ $yellow: #f5bc04;
 }
 
 .btn-add {
-  background: #bf7034 !important;
-  @include border-radius(0!important);
+  background: #323a49 !important;
   color: #fff !important;
   padding: 10px 50px !important;
+  border-radius: 5px;
 }
 
 .react-tag-input {

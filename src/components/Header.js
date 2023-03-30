@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { transitions } from "bootstrap";
+import { MdOutlineLogout } from "react-icons/md";
 
 const Header = ({ active, setActive, user, handleLogout }) => {
   const userId = user?.uid;
@@ -75,7 +76,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                     <>
                       <div className="profile-logo">
                         <img
-                          src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                          src="https://res.cloudinary.com/daxmjqsy2/image/upload/v1680174784/avatar_pbxti9.png"
                           alt="logo"
                           style={{
                             width: "30px",
@@ -90,6 +91,11 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                       </p>
                       <li className="nav-item nav-link" onClick={handleLogout}>
                         Logout
+                        <MdOutlineLogout
+                          style={{
+                            marginLeft: "5px",
+                          }}
+                        />
                       </li>
                     </>
                   ) : (

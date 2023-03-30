@@ -6,6 +6,7 @@ import { db } from "../firebase/firebase";
 // components
 import BlogSection from "../components/BlogSection";
 import Spinner from "../components/Spinner";
+import Footer from "../components/Footer";
 
 const CategoryBlog = ({ setActive }) => {
   const [categoryBlogs, setCategoryBlogs] = useState([]);
@@ -35,7 +36,7 @@ const CategoryBlog = ({ setActive }) => {
   }
 
   return (
-    <div>
+    <div className="c-container">
       <div className="container">
         <div className="row">
           <div className="blog-heading text-center py-2 mb-4">
@@ -47,6 +48,9 @@ const CategoryBlog = ({ setActive }) => {
             </div>
           ))}
         </div>
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );

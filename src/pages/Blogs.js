@@ -16,6 +16,7 @@ import { db } from "../firebase/firebase";
 import BlogSection from "../components/BlogSection";
 import Pagination from "../components/Pagination";
 import Spinner from "../components/Spinner";
+import Footer from "../components/Footer";
 
 const Blogs = ({ setActive }) => {
   const [loading, setLoading] = useState(false);
@@ -102,7 +103,7 @@ const Blogs = ({ setActive }) => {
     }
   };
   return (
-    <div>
+    <div className="blog-c">
       <div className="container">
         <div className="row">
           <div className="blog-heading text-center py-2 mb-4">Daily Blogs</div>
@@ -117,6 +118,9 @@ const Blogs = ({ setActive }) => {
           noOfPages={noOfPages}
           handlePageChange={handlePageChange}
         />
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );

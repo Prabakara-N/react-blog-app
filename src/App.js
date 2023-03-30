@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./style.scss";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // routes
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
@@ -17,7 +17,6 @@ import CategoryBlog from "./pages/CategoryBlog";
 // components
 import Header from "./components/Header";
 import ScrollToTop from "./components/ScrollToTop";
-import Footer from "./components/Footer";
 // fire base
 import { auth } from "./firebase/firebase";
 import { signOut } from "firebase/auth";
@@ -97,7 +96,6 @@ const App = () => {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer />
     </div>
   );
 };

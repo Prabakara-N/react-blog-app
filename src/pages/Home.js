@@ -20,10 +20,11 @@ import Spinner from "../components/Spinner";
 import Tags from "../components/Tags";
 import FeatureBlogs from "../components/FeatureBlogs";
 import Trending from "../components/Trending";
+import Category from "../components/Category";
 import Search from "../components/Search";
 import { isEmpty, isNull } from "lodash";
-import Category from "../components/Category";
 import { toast } from "react-toastify";
+import Footer from "../components/Footer";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -205,45 +206,50 @@ const Home = ({ setActive, user, active }) => {
   console.log("categoryCount", categoryCount);
 
   return (
-    <div className="container-fluid pb-4 pt-4 padding">
-      <div className="container padding">
-        <div className="row mx-0">
-          <Trending blogs={trendBlogs} />
-          <div className="col-md-8">
-            <div className="blog-heading text-start py-2 mb-4">Daily Blogs</div>
-            {blogs.length === 0 && location.pathname !== "/" && (
-              <>
-                <h4>
-                  No Blog found with search keyword:{" "}
-                  <strong>{searchQuery}</strong>
-                </h4>
-              </>
-            )}
-            {blogs?.map((blog) => (
-              <BlogSection
-                key={blog.id}
-                user={user}
-                handleDelete={handleDelete}
-                {...blog}
-              />
-            ))}
+    <>
+      <div className="container-fluid pb-4 pt-4 padding">
+        <div className="container padding">
+          <div className="row mx-0">
+            <Trending blogs={trendBlogs} />
+            <div className="col-md-8">
+              <div className="blog-heading text-start py-2 mb-4">
+                Daily Blogs
+              </div>
+              {blogs.length === 0 && location.pathname !== "/" && (
+                <>
+                  <h4>
+                    No Blog found with search keyword:{" "}
+                    <strong>{searchQuery}</strong>
+                  </h4>
+                </>
+              )}
+              {blogs?.map((blog) => (
+                <BlogSection
+                  key={blog.id}
+                  user={user}
+                  handleDelete={handleDelete}
+                  {...blog}
+                />
+              ))}
 
-            {!hide && (
-              <button className="btn btn-primary" onClick={fetchMore}>
-                Load More
-              </button>
-            )}
-          </div>
-          <div className="col-md-3">
-            <Search search={search} handleChange={handleChange} />
-            <div className="blog-heading text-start py-2 mb-4">Tags</div>
-            <Tags tags={tags} />
-            <FeatureBlogs title={"Most Popular"} blogs={blogs} />
-            <Category catgBlogsCount={categoryCount} />
+              {!hide && (
+                <button className="btn btn-primary" onClick={fetchMore}>
+                  Load More
+                </button>
+              )}
+            </div>
+            <div className="col-md-3">
+              <Search search={search} handleChange={handleChange} />
+              <div className="blog-heading text-start py-2 mb-4">Tags</div>
+              <Tags tags={tags} />
+              <FeatureBlogs title={"Most Popular"} blogs={blogs} />
+              <Category catgBlogsCount={categoryCount} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

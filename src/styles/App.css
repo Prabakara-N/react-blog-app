@@ -78,6 +78,20 @@ body {
   transform: scale(1.1);
 }
 
+.c-container {
+  min-height: 88.4vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.blog-c {
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
