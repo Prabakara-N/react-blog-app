@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from "react";
+// firebase
 import {
   collection,
   endAt,
@@ -9,11 +11,11 @@ import {
   query,
   startAfter,
 } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import { db } from "../firebase/firebase";
+// components
 import BlogSection from "../components/BlogSection";
 import Pagination from "../components/Pagination";
 import Spinner from "../components/Spinner";
-import { db } from "../firebase/firebase";
 
 const Blogs = ({ setActive }) => {
   const [loading, setLoading] = useState(false);

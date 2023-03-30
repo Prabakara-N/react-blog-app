@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+// firebase
 import {
   collection,
   doc,
@@ -12,21 +13,23 @@ import {
   orderBy,
   where,
 } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 import { isEmpty } from "lodash";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+// components
 import CommentBox from "../components/CommentBox";
 import Like from "../components/Like";
 import FeatureBlogs from "../components/FeatureBlogs";
 import RelatedBlog from "../components/RelatedBlog";
 import Tags from "../components/Tags";
 import UserComments from "../components/UserComments";
-import { db } from "../firebase/firebase";
 import Spinner from "../components/Spinner";
 
 const Detail = ({ setActive, user }) => {
   const userId = user?.uid;
   const { id } = useParams();
+  const [loading, setLoading] = useState(false);
   const [blog, setBlog] = useState(null);
   const [blogs, setBlogs] = useState([]);
   const [tags, setTags] = useState([]);
@@ -36,35 +39,95 @@ const Detail = ({ setActive, user }) => {
   const [relatedBlogs, setRelatedBlogs] = useState([]);
 
   useEffect(() => {
-    const getBlogsData = async () => {
+    const getRecentBlogs = async () => {
       const blogRef = collection(db, "blogs");
-      const blogs = await getDocs(blogRef);
-      setBlogs(blog.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-      let tags = [];
-      blogs.docs.map((doc) => tags.push(...doc.get("tags")));
-      let uniqueTags = [...new Set(tags)];
-      setTags(uniqueTags);
+      const recentBlogs = query(
+        blogRef,
+        orderBy("timestamp", "desc"),
+        limit(5)
+      );
+      const docSnapshot = await getDocs(recentBlogs);
+      setBlogs(docSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
     };
 
-    getBlogsData();
+    getRecentBlogs();
   }, []);
 
   useEffect(() => {
-    id && getBlogDetails();
+    id && getBlogDetail();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  const getBlogDetails = async () => {
+  if (loading) {
+    return <Spinner />;
+  }
+
+  const getBlogDetail = async () => {
+    setLoading(true);
+    const blogRef = collection(db, "blogs");
     const docRef = doc(db, "blogs", id);
-    const blockDetail = await getDoc(docRef);
-    setBlog(blockDetail.data());
+    const blogDetail = await getDoc(docRef);
+    const blogs = await getDocs(blogRef);
+    let tags = [];
+    blogs.docs.map((doc) => tags.push(...doc.get("tags")));
+    let uniqueTags = [...new Set(tags)];
+    setTags(uniqueTags);
+    setBlog(blogDetail.data());
+    const relatedBlogsQuery = query(
+      blogRef,
+      where("tags", "array-contains-any", blogDetail.data().tags, limit(3))
+    );
+    setComments(blogDetail.data().comments ? blogDetail.data().comments : []);
+    setLikes(blogDetail.data().likes ? blogDetail.data().likes : []);
+    const relatedBlogSnapshot = await getDocs(relatedBlogsQuery);
+    const relatedBlogs = [];
+    relatedBlogSnapshot.forEach((doc) => {
+      relatedBlogs.push({ id: doc.id, ...doc.data() });
+    });
+    setRelatedBlogs(relatedBlogs);
     setActive(null);
+    setLoading(false);
   };
 
-  const handleComment = async () => {};
+  const handleComment = async (e) => {
+    e.preventDefault();
+    comments.push({
+      createdAt: Timestamp.fromDate(new Date()),
+      userId,
+      name: user?.displayName,
+      body: userComment,
+    });
+    toast.success("Comment posted successfully");
+    await updateDoc(doc(db, "blogs", id), {
+      ...blog,
+      comments,
+      timestamp: serverTimestamp(),
+    });
+    setComments(comments);
+    setUserComment("");
+  };
 
-  const handleLike = async () => {};
+  const handleLike = async () => {
+    if (userId) {
+      if (blog?.likes) {
+        const index = likes.findIndex((id) => id === userId);
+        if (index === -1) {
+          likes.push(userId);
+          setLikes([...new Set(likes)]);
+        } else {
+          likes = likes.filter((id) => id !== userId);
+          setLikes(likes);
+        }
+      }
+      await updateDoc(doc(db, "blogs", id), {
+        ...blog,
+        likes,
+        timestamp: serverTimestamp(),
+      });
+    }
+  };
 
+  console.log("relatedBlogs", relatedBlogs);
   return (
     <div className="single">
       <div

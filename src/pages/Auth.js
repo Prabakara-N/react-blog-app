@@ -1,12 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { toast } from "react-toastify";
 import { auth } from "../firebase/firebase";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const initialState = {
   firstName: "",

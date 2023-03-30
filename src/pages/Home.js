@@ -1,3 +1,6 @@
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+// firebase
 import {
   collection,
   deleteDoc,
@@ -10,18 +13,17 @@ import {
   where,
   startAfter,
 } from "firebase/firestore";
-import React, { useState, useEffect } from "react";
+import { db } from "../firebase/firebase";
+// components
 import BlogSection from "../components/BlogSection";
 import Spinner from "../components/Spinner";
-import { db } from "../firebase/firebase";
-import { toast } from "react-toastify";
 import Tags from "../components/Tags";
 import FeatureBlogs from "../components/FeatureBlogs";
 import Trending from "../components/Trending";
 import Search from "../components/Search";
 import { isEmpty, isNull } from "lodash";
-import { useLocation } from "react-router-dom";
 import Category from "../components/Category";
+import { toast } from "react-toastify";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -66,7 +68,6 @@ const Home = ({ setActive, user, active }) => {
         const uniqueTags = [...new Set(tags)];
         setTags(uniqueTags);
         setTotalBlogs(list);
-        // setBlogs(list);
         setLoading(false);
         setActive("home");
       },
