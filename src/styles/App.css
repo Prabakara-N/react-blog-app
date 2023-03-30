@@ -152,4 +152,16 @@ body {
     flex-direction: column !important;
     margin-top: 15px;
   }
+
+  .error {
+    width: 50%;
+    height: 100vh;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .error {
+    width: 50%;
+    max-height: 95vh;
+  }
 }

@@ -80,6 +80,7 @@ const AddEditBlog = ({ user, setActive }) => {
 
   useEffect(() => {
     id && getBlockDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const getBlockDetails = async () => {

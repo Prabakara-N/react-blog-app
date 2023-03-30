@@ -51,6 +51,7 @@ const Detail = ({ setActive, user }) => {
 
   useEffect(() => {
     id && getBlogDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const getBlogDetails = async () => {
