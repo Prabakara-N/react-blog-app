@@ -24,7 +24,21 @@ import UserComments from "../components/UserComments";
 import { db } from "../firebase/firebase";
 import Spinner from "../components/Spinner";
 
-const Detail = () => {
+const Detail = ({ setActive }) => {
+  const { id } = useParams();
+  const [blog, setBlog] = useState(null);
+
+  useEffect(() => {
+    id && getBlogDetails();
+  }, [id]);
+
+  const getBlogDetails = async () => {
+    const docRef = doc(db, "blogs", id);
+    const blockDetail = await getDoc(docRef);
+    setBlog(blockDetail.data());
+    setActive(null);
+  };
+
   return <div>Detail</div>;
 };
 

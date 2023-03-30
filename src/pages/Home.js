@@ -60,6 +60,22 @@ const Home = ({ setActive, user, active }) => {
     };
   }, []);
 
+  if (loading) {
+    return <Spinner />;
+  }
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure want to delete this blog?")) {
+      try {
+        setLoading(true);
+        await deleteDoc(doc(db, "blogs", id));
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return <div>Home</div>;
 };
 
