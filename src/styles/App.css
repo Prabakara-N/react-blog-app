@@ -68,6 +68,16 @@ body {
   font-size: 2rem;
 }
 
+.s-icon {
+  transition: all 0.5s;
+}
+
+.s-icon:hover {
+  color: var(--clr-Very-Dark-Grayish-Blue);
+  transition: all 0.5s;
+  transform: scale(1.1);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

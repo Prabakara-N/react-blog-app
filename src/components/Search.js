@@ -26,7 +26,10 @@ const Search = ({ search, handleChange }) => {
             onChange={handleChange}
           />
         </div>
-        <button className="btn btn-secondary search-btn">
+        <button
+          className="btn btn-secondary search-btn"
+          style={{ marginLeft: "6px" }}
+        >
           <i className="fa fa-search" />
         </button>
       </form>
