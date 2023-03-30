@@ -226,14 +226,6 @@ $yellow: #f5bc04;
   border-radius: 4px;
 }
 
-.fa-trash {
-  color: #c43421 !important;
-}
-
-.fa-edit {
-  color: lightsalmon !important;
-}
-
 .meta-info {
   font-size: 15px;
   color: #222;
@@ -260,13 +252,19 @@ $yellow: #f5bc04;
 }
 
 .btn-read {
-  background: #544e66 !important;
+  background: #48a9a6 !important;
   @include border-radius(0!important);
   color: #fff !important;
   padding: 5px 10px !important;
   float: left;
   margin-top: 10px;
   font-size: 14px;
+  transition: all 0.4s;
+}
+
+.btn-read:hover {
+  transition: all 0.4s;
+  background: #3bcec9 !important;
 }
 
 // Detail

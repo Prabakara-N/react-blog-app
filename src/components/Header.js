@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 // import { transitions } from "bootstrap";
 import { MdOutlineLogout } from "react-icons/md";
+import { HiLogin } from "react-icons/hi";
 
 const Header = ({ active, setActive, user, handleLogout }) => {
   const userId = user?.uid;
@@ -29,7 +30,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <Link to="/" style={{ textDecoration: "none" }}>
                   <li
-                    className={`nav-item nav-link ${
+                    className={`nav-item nav-link fw-semibold ${
                       active === "home" ? "active" : ""
                     }`}
                     onClick={() => setActive("home")}
@@ -39,7 +40,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                 </Link>
                 <Link to="/blogs" style={{ textDecoration: "none" }}>
                   <li
-                    className={`nav-item nav-link ${
+                    className={`nav-item nav-link fw-semibold ${
                       active === "blogs" ? "active" : ""
                     }`}
                     onClick={() => setActive("blogs")}
@@ -50,7 +51,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
 
                 <Link to="/create" style={{ textDecoration: "none" }}>
                   <li
-                    className={`nav-item nav-link ${
+                    className={`nav-item nav-link fw-semibold ${
                       active === "create" ? "active" : ""
                     }`}
                     onClick={() => setActive("create")}
@@ -61,7 +62,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
 
                 <Link to="/about" style={{ textDecoration: "none" }}>
                   <li
-                    className={`nav-item nav-link ${
+                    className={`nav-item nav-link fw-semibold ${
                       active === "about" ? "active" : ""
                     }`}
                     onClick={() => setActive("about")}
@@ -109,7 +110,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                         } fw-bold`}
                         onClick={() => setActive("login")}
                       >
-                        Login
+                        Login <HiLogin />
                       </li>
                     </Link>
                   )}

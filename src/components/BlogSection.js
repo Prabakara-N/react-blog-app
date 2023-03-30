@@ -43,7 +43,7 @@ const BlogSection = ({
             <button className="btn btn-read">Read More</button>
           </Link>
           {user && user.uid === userId && (
-            <div style={{ float: "right" }}>
+            <div className="mt-3" style={{ float: "right" }}>
               <MdDelete className="trash" onClick={() => handleDelete(id)} />
               <Link to={`/update/${id}`}>
                 <RiEdit2Fill className="edit" />

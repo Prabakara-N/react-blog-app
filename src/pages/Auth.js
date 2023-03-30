@@ -132,10 +132,12 @@ const Auth = ({ setActive, setUser }) => {
 
               <div className="col-12 py-3 text-center">
                 <button
-                  className={`btn ${!signUp ? "btn-sign-in" : "btn-sign-up"}`}
+                  className={`btn fw-semibold ${
+                    !signUp ? "btn-sign-in" : "btn-sign-up"
+                  }`}
                   type="submit"
                 >
-                  {!signUp ? "Sign-in" : "Sign-up"}
+                  {!signUp ? "Sign-In" : "Sign-Up"}
                 </button>
               </div>
             </form>
