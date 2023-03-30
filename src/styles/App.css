@@ -57,6 +57,17 @@ body {
   pointer-events: none;
 }
 
+.trash {
+  cursor: pointer;
+  color: orangered;
+  font-size: 2rem;
+}
+
+.edit {
+  cursor: pointer;
+  font-size: 2rem;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

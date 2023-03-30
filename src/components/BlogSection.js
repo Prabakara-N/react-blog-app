@@ -1,7 +1,8 @@
 import React from "react";
-import FontAwesome from "react-fontawesome";
 import { Link } from "react-router-dom";
 import { excerpt } from "../utils";
+import { MdDelete } from "react-icons/md";
+import { RiEdit2Fill } from "react-icons/ri";
 
 const BlogSection = ({
   id,
@@ -43,18 +44,9 @@ const BlogSection = ({
           </Link>
           {user && user.uid === userId && (
             <div style={{ float: "right" }}>
-              <FontAwesome
-                name="trash"
-                style={{ margin: "15px", cursor: "pointer" }}
-                size="2x"
-                onClick={() => handleDelete(id)}
-              />
+              <MdDelete className="trash" onClick={() => handleDelete(id)} />
               <Link to={`/update/${id}`}>
-                <FontAwesome
-                  name="edit"
-                  style={{ cursor: "pointer" }}
-                  size="2x"
-                />
+                <RiEdit2Fill className="edit" />
               </Link>
             </div>
           )}
