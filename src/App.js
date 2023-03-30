@@ -54,7 +54,10 @@ const App = () => {
           element={<Home active={active} setActive={setActive} user={user} />}
         />
         <Route path="/blogs" element={<Blogs />} />
-        <Route path="/detail/:id" element={<Detail setActive={setActive} />} />
+        <Route
+          path="/detail/:id"
+          element={<Detail setActive={setActive} user={user} />}
+        />
         <Route
           path="/create"
           element={
