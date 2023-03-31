@@ -36,7 +36,7 @@ const UserComments = ({
       timestamp: serverTimestamp(),
     });
     setComments(filteredComments);
-    toast.success("Comment Delete successfully");
+    toast.success("Comment Deleted successfully");
   };
 
   return (
