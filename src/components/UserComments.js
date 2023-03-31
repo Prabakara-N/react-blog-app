@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase/firebase";
 import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { MdDelete } from "react-icons/md";
-import { Tooltip } from "bootstrap";
+import Tooltip from "react-bootstrap/Tooltip";
+import { OverlayTrigger } from "react-bootstrap";
 
 const UserComments = ({
   blog,
@@ -19,14 +20,11 @@ const UserComments = ({
 }) => {
   const { id } = useParams();
 
-  useEffect(() => {
-    let tooltipTriggerList = [].slice.call(
-      document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    );
-    tooltipTriggerList.map(function (tooltipTriggerEl) {
-      return new Tooltip(tooltipTriggerEl);
-    });
-  }, []);
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      delete
+    </Tooltip>
+  );
 
   const deleteComment = async (createdAt) => {
     const filteredComments = comments.filter((comment) => {
@@ -72,16 +70,21 @@ const UserComments = ({
                     </div>
                     <div>
                       {user && user.uid === userId && (
-                        <button
-                          className="btn-delete"
-                          type="button"
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="top"
-                          title="Delete"
-                          onClick={() => deleteComment(createdAt)}
-                        >
-                          <MdDelete />
-                        </button>
+                        <>
+                          <OverlayTrigger
+                            placement="top"
+                            delay={{ show: 200, hide: 100 }}
+                            overlay={renderTooltip}
+                          >
+                            <button
+                              className="btn-delete"
+                              type="button"
+                              onClick={() => deleteComment(createdAt)}
+                            >
+                              <MdDelete />
+                            </button>
+                          </OverlayTrigger>
+                        </>
                       )}
                     </div>
                   </div>
