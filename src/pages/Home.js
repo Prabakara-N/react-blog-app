@@ -125,6 +125,7 @@ const Home = ({ setActive, user, active }) => {
     setLoading(false);
   };
 
+  // search
   const searchBlogs = async () => {
     const blogRef = collection(db, "blogs");
     const searchTitleQuery = query(blogRef, where("title", "==", searchQuery));
@@ -160,8 +161,9 @@ const Home = ({ setActive, user, active }) => {
     return <Spinner />;
   }
 
+  // delete
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure wanted to delete that blog ?")) {
+    if (window.confirm("Are you sure you wanted to delete this blog ?")) {
       try {
         setLoading(true);
         await deleteDoc(doc(db, "blogs", id));

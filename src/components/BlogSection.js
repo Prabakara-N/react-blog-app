@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { excerpt } from "../utils";
+// icons
 import { MdDelete } from "react-icons/md";
 import { RiEdit2Fill } from "react-icons/ri";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { FcCalendar } from "react-icons/fc";
 
 const BlogSection = ({
   id,
@@ -36,7 +38,7 @@ const BlogSection = ({
             <span className="title py-2">{title}</span>
             <span className="meta-info">
               <p className="author">{author}</p> -&nbsp;
-              {timestamp.toDate().toDateString()}
+              {timestamp.toDate().toDateString()} <FcCalendar />
             </span>
           </div>
           <div className="short-description text-start">

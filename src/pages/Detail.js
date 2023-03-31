@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { FcCalendar } from "react-icons/fc";
 // firebase
 import {
   collection,
@@ -148,7 +149,7 @@ const Detail = ({ setActive, user }) => {
               <div className="col-md-8">
                 <span className="meta-info text-start">
                   By <p className="author">{blog?.author}</p> -&nbsp;
-                  {blog?.timestamp.toDate().toDateString()}
+                  {blog?.timestamp.toDate().toDateString()} <FcCalendar />
                   <Like handleLike={handleLike} likes={likes} userId={userId} />
                 </span>
                 <p className="text-start">{blog?.description}</p>

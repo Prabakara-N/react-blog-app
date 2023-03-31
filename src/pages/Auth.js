@@ -19,6 +19,7 @@ const initialState = {
 const Auth = ({ setActive, setUser }) => {
   const [state, setState] = useState(initialState);
   const [signUp, setSignUp] = useState(false);
+  const [error, setError] = useState("");
 
   const { firstName, lastName, email, password, confirmPassword } = state;
 
@@ -33,13 +34,25 @@ const Auth = ({ setActive, setUser }) => {
     if (!signUp) {
       // signup is false ...then user will be in signin page
       if (email && password) {
-        const { user } = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-        setUser(user);
-        setActive("home");
+        try {
+          const { user } = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+          setUser(user);
+          setActive("home");
+          navigate("/");
+        } catch (error) {
+          console.log(error);
+          if (error.message === "Firebase: Error (auth/user-not-found).") {
+            setError("User Doesn't Exist...Create Your Account");
+          } else if (
+            error.message === "Firebase: Error (auth/wrong-password)."
+          ) {
+            setError("Password Wrong...Please Check Your Password");
+          }
+        }
       } else {
         return toast.error("All fields are mandatory to fill");
       }
@@ -48,18 +61,29 @@ const Auth = ({ setActive, setUser }) => {
         return toast.error("Password doesn't match");
       }
       if (firstName && lastName && email && password) {
-        const { user } = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-        await updateProfile(user, { displayName: `${firstName} ${lastName}` });
-        setActive("home");
+        try {
+          const { user } = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+          await updateProfile(user, {
+            displayName: `${firstName} ${lastName}`,
+          });
+          setActive("home");
+          navigate("/");
+        } catch (error) {
+          console.log(error);
+          if (
+            error.message === "Firebase: Error (auth/email-already-in-use)."
+          ) {
+            setError("User Already Exist...Try with another Email");
+          }
+        }
       } else {
         return toast.error("All fields are mandatory to fill");
       }
     }
-    navigate("/");
   };
 
   return (
@@ -72,6 +96,7 @@ const Auth = ({ setActive, setUser }) => {
         </div>
         <div className="row h-100 justify-content-center align-items-center">
           <div className="col-10 col-md-8 col-lg-6">
+            <small className="text-danger fw-semibold">{error}</small>
             <form className="row" onSubmit={handleAuth}>
               {signUp && (
                 <>
@@ -150,7 +175,10 @@ const Auth = ({ setActive, setUser }) => {
                       <span
                         className="link-danger"
                         style={{ textDecoration: "none", cursor: "pointer" }}
-                        onClick={() => setSignUp(true)}
+                        onClick={() => {
+                          setSignUp(true);
+                          setError("");
+                        }}
                       >
                         Sign Up
                       </span>
@@ -168,7 +196,10 @@ const Auth = ({ setActive, setUser }) => {
                           cursor: "pointer",
                           color: "#298af2",
                         }}
-                        onClick={() => setSignUp(false)}
+                        onClick={() => {
+                          setError("");
+                          setSignUp(false);
+                        }}
                       >
                         Sign In
                       </span>
