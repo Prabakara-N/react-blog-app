@@ -17,7 +17,6 @@ const UserComments = ({
   createdAt,
   msg,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
