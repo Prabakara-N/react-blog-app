@@ -114,6 +114,19 @@ body {
   justify-content: space-between;
 }
 
+.btn-delete {
+  border: none;
+  background-color: transparent;
+  transition: all 0.4s;
+  font-size: 1.15rem;
+  margin-top: -5px;
+}
+
+.btn-delete:hover {
+  transition: all 0.4s;
+  color: orangered;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -222,11 +235,6 @@ body {
 @media screen and (min-width: 900px) {
   .error {
     width: 50%;
-    max-height: 95vh;
-  }
-
-  .trash,
-  .edit {
-    font-size: 1.75rem;
+    max-height: 88vh;
   }
 }

@@ -1,6 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { db } from "../firebase/firebase";
+import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
+import { MdDelete } from "react-icons/md";
+import { Tooltip } from "bootstrap";
 
-const UserComments = ({ name, body, createdAt, msg }) => {
+const UserComments = ({
+  blog,
+  userId,
+  user,
+  comments,
+  setComments,
+  name,
+  body,
+  createdAt,
+  msg,
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { id } = useParams();
+
+  useEffect(() => {
+    let tooltipTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    );
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new Tooltip(tooltipTriggerEl);
+    });
+  }, []);
+
+  const deleteComment = async (createdAt) => {
+    const filteredComments = comments.filter((comment) => {
+      return comment.createdAt !== createdAt;
+    });
+    await updateDoc(doc(db, "blogs", id), {
+      ...blog,
+      comments: filteredComments,
+      timestamp: serverTimestamp(),
+    });
+    setComments(filteredComments);
+    toast.success("Comment Delete successfully");
+  };
+
   return (
     <div>
       <div className="row">
@@ -22,11 +63,28 @@ const UserComments = ({ name, body, createdAt, msg }) => {
                       }}
                     />
                   </div>
-                  <div className="media-body">
-                    <h3 className="text-start media-heading user_name">
-                      {name} <small>{createdAt.toDate().toDateString()}</small>
-                    </h3>
-                    <p className="text-start">{body}</p>
+                  <div className="d-flex gap-4">
+                    <div className="media-body">
+                      <h3 className="text-start media-heading user_name">
+                        {name}{" "}
+                        <small>{createdAt.toDate().toDateString()}</small>
+                      </h3>
+                      <p className="text-start">{body}</p>
+                    </div>
+                    <div>
+                      {user && user.uid === userId && (
+                        <button
+                          className="btn-delete"
+                          type="button"
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="top"
+                          title="Delete"
+                          onClick={() => deleteComment(createdAt)}
+                        >
+                          <MdDelete />
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </>
               )}

@@ -94,20 +94,24 @@ const Detail = ({ setActive, user }) => {
 
   const handleComment = async (e) => {
     e.preventDefault();
-    comments.push({
-      createdAt: Timestamp.fromDate(new Date()),
-      userId,
-      name: user?.displayName,
-      body: userComment,
-    });
-    toast.success("Comment posted successfully");
-    await updateDoc(doc(db, "blogs", id), {
-      ...blog,
-      comments,
-      timestamp: serverTimestamp(),
-    });
-    setComments(comments);
-    setUserComment("");
+    if (userComment) {
+      comments.push({
+        createdAt: Timestamp.fromDate(new Date()),
+        userId,
+        name: user?.displayName,
+        body: userComment,
+      });
+      toast.success("Comment posted successfully");
+      await updateDoc(doc(db, "blogs", id), {
+        ...blog,
+        comments,
+        timestamp: serverTimestamp(),
+      });
+      setComments(comments);
+      setUserComment("");
+    } else {
+      toast.error("Type Your Comment");
+    }
   };
 
   const handleLike = async () => {
@@ -171,7 +175,15 @@ const Detail = ({ setActive, user }) => {
                     ) : (
                       <>
                         {comments?.map((comment) => (
-                          <UserComments key={uuidv4()} {...comment} />
+                          <UserComments
+                            blog={blog}
+                            comments={comments}
+                            setComments={setComments}
+                            userId={userId}
+                            user={user}
+                            key={uuidv4()}
+                            {...comment}
+                          />
                         ))}
                       </>
                     )}
@@ -190,7 +202,7 @@ const Detail = ({ setActive, user }) => {
                 <FeatureBlogs title={"Recent Blogs"} blogs={blogs} />
               </div>
             </div>
-            <RelatedBlog id={id} blogs={relatedBlogs} />
+            <RelatedBlog key={uuidv4()} id={id} blogs={relatedBlogs} />
           </div>
         </div>
       </div>
