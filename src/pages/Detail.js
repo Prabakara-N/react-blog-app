@@ -129,8 +129,6 @@ const Detail = ({ setActive, user }) => {
     }
   };
 
-  console.log(comments);
-
   return (
     <>
       <div className="single">

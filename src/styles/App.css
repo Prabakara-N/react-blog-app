@@ -57,26 +57,37 @@ body {
   pointer-events: none;
 }
 
+.options {
+  background-color: gainsboro;
+  position: absolute;
+  right: 10px;
+  bottom: 0.9rem;
+  padding: 7px;
+  border-radius: 5px;
+}
+
+.edit-link {
+  transition: all 0.4s;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.edit-link:hover {
+  background-color: rgb(243, 243, 243);
+  transition: all 0.4s;
+}
+
 .trash {
   cursor: pointer;
   font-size: 1.5rem;
   transition: all 0.5s;
-  color: orangered;
-}
-
-.trash:hover {
-  color: red;
-  transition: all 0.5s;
+  color: var(--clr-Very-Grayish-Blue);
 }
 
 .edit {
   cursor: pointer;
   font-size: 1.5rem;
-}
-
-.edit:hover {
-  transition: all 0.5s;
-  color: #1768ac;
+  color: var(--clr-Very-Grayish-Blue);
 }
 
 .s-icon {
@@ -84,7 +95,7 @@ body {
 }
 
 .s-icon:hover {
-  color: var(--clr-Very-Dark-Grayish-Blue);
+  color: var(--clr-Very-Grayish-Blue);
   transition: all 0.5s;
   transform: scale(1.1);
 }

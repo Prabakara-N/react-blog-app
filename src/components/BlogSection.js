@@ -18,6 +18,7 @@ const BlogSection = ({
   handleDelete,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div>
       <div className="row pb-4">
@@ -45,23 +46,42 @@ const BlogSection = ({
             <button className="btn btn-read">Read More</button>
           </Link>
           {user && user.uid === userId && (
-            <div className="mt-3" style={{ float: "right" }}>
-              {/* <MdDelete className="trash" onClick={() => handleDelete(id)} />
-              <Link to={`/update/${id}`}>
-                <RiEdit2Fill className="edit" />
-              </Link> */}
-              <BsThreeDotsVertical
-                className="dots cursor-pointer"
-                onClick={() => setIsOpen(!true)}
-              />
+            <div className="mt-3 position-relative" style={{ float: "right" }}>
+              <div
+                style={{
+                  cursor: "pointer",
+                }}
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <BsThreeDotsVertical />
+              </div>
               {isOpen && (
-                <div>
-                  <MdDelete
-                    className="trash"
+                <div className="options">
+                  <div
+                    className="d-flex gap-1 mb-2 edit-link"
+                    style={{
+                      cursor: "pointer",
+                    }}
                     onClick={() => handleDelete(id)}
-                  />
-                  <Link to={`/update/${id}`}>
-                    <RiEdit2Fill className="edit" />
+                  >
+                    <MdDelete className="trash" />
+                    Delete
+                  </div>
+                  <Link
+                    className="d-flex gap-1 edit-link"
+                    to={`/update/${id}`}
+                    style={{
+                      textDecoration: "none",
+                    }}
+                  >
+                    <RiEdit2Fill className="edit" />{" "}
+                    <span
+                      style={{
+                        color: "black",
+                      }}
+                    >
+                      Edit
+                    </span>
                   </Link>
                 </div>
               )}
