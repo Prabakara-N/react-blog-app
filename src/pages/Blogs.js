@@ -73,6 +73,7 @@ const Blogs = ({ setActive }) => {
     setLastVisible(nextBlogsSnaphot.docs[nextBlogsSnaphot.docs.length - 1]);
     setLoading(false);
   };
+
   const fetchPrev = async () => {
     setLoading(true);
     const blogRef = collection(db, "blogs");
