@@ -31,6 +31,9 @@ const categoryOption = [
   "Politics",
   "Sports",
   "Business",
+  "Movies",
+  "Traveling",
+  "Others",
 ];
 
 const AddEditBlog = ({ user, setActive }) => {

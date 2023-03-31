@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 // firebase
 import {
   collection,
@@ -128,7 +129,8 @@ const Detail = ({ setActive, user }) => {
     }
   };
 
-  console.log("relatedBlogs", relatedBlogs);
+  console.log(comments);
+
   return (
     <>
       <div className="single">
@@ -158,7 +160,9 @@ const Detail = ({ setActive, user }) => {
                 <br />
                 <div className="custombox">
                   <div className="scroll">
-                    <h4 className="small-title">{comments?.length} Comment</h4>
+                    <h4 className="small-title bg-success">
+                      {comments?.length} Comment
+                    </h4>
                     {isEmpty(comments) ? (
                       <UserComments
                         msg={
@@ -168,7 +172,7 @@ const Detail = ({ setActive, user }) => {
                     ) : (
                       <>
                         {comments?.map((comment) => (
-                          <UserComments {...comment} />
+                          <UserComments key={uuidv4()} {...comment} />
                         ))}
                       </>
                     )}

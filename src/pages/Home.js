@@ -90,14 +90,11 @@ const Home = ({ setActive, user, active }) => {
 
   const getBlogs = async () => {
     const blogRef = collection(db, "blogs");
-    console.log(blogRef);
     const firstFour = query(blogRef, orderBy("title"), limit(4));
     const docSnapshot = await getDocs(firstFour);
     setBlogs(docSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
     setLastVisible(docSnapshot.docs[docSnapshot.docs.length - 1]);
   };
-
-  console.log("blogs", blogs);
 
   const updateState = (docSnapshot) => {
     const isCollectionEmpty = docSnapshot.size === 0;
@@ -203,8 +200,6 @@ const Home = ({ setActive, user, active }) => {
       count: counts[k],
     };
   });
-
-  console.log("categoryCount", categoryCount);
 
   return (
     <>

@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CommentBox = ({ userId, userComment, setUserComment, handleComment }) => {
   const navigate = useNavigate();
@@ -18,7 +19,13 @@ const CommentBox = ({ userId, userComment, setUserComment, handleComment }) => {
       {!userId ? (
         <>
           <h5>Please login or Create an account to post comment</h5>
-          <button className="btn btn-success" onClick={() => navigate("/auth")}>
+          <button
+            className="btn btn-success"
+            onClick={() => {
+              navigate("/auth");
+              toast.warning("Please Login to Comment on this post");
+            }}
+          >
             Login
           </button>
         </>

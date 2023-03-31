@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { excerpt } from "../utils";
 import { MdDelete } from "react-icons/md";
 import { RiEdit2Fill } from "react-icons/ri";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 const BlogSection = ({
   id,
@@ -16,9 +17,10 @@ const BlogSection = ({
   user,
   handleDelete,
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div>
-      <div className="row pb-4" key={id}>
+      <div className="row pb-4">
         <div className="col-md-5">
           <div className="hover-blogs-img">
             <div className="blogs-img">
@@ -44,10 +46,25 @@ const BlogSection = ({
           </Link>
           {user && user.uid === userId && (
             <div className="mt-3" style={{ float: "right" }}>
-              <MdDelete className="trash" onClick={() => handleDelete(id)} />
+              {/* <MdDelete className="trash" onClick={() => handleDelete(id)} />
               <Link to={`/update/${id}`}>
                 <RiEdit2Fill className="edit" />
-              </Link>
+              </Link> */}
+              <BsThreeDotsVertical
+                className="dots cursor-pointer"
+                onClick={() => setIsOpen(!true)}
+              />
+              {isOpen && (
+                <div>
+                  <MdDelete
+                    className="trash"
+                    onClick={() => handleDelete(id)}
+                  />
+                  <Link to={`/update/${id}`}>
+                    <RiEdit2Fill className="edit" />
+                  </Link>
+                </div>
+              )}
             </div>
           )}
         </div>
