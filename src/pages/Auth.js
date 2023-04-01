@@ -46,11 +46,13 @@ const Auth = ({ setActive, setUser }) => {
         } catch (error) {
           console.log(error);
           if (error.message === "Firebase: Error (auth/user-not-found).") {
-            setError("User Doesn't Exist...Create Your Account");
+            setError("User doesn't exist...Create your account");
           } else if (
             error.message === "Firebase: Error (auth/wrong-password)."
           ) {
-            setError("Password Wrong...Please Check Your Password");
+            setError(
+              "The password entered is incorrect. Please check your password"
+            );
           }
         }
       } else {
@@ -77,7 +79,7 @@ const Auth = ({ setActive, setUser }) => {
           if (
             error.message === "Firebase: Error (auth/email-already-in-use)."
           ) {
-            setError("User Already Exist...Try with another Email");
+            setError("User already exist...Try with different email");
           }
         }
       } else {
