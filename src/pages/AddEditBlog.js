@@ -141,8 +141,10 @@ const AddEditBlog = ({ user, setActive }) => {
           console.log(error);
         }
       }
+      navigate("/");
+    } else {
+      toast.error("All fields are mendatory to fill");
     }
-    navigate("/");
   };
 
   return (
