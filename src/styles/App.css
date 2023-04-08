@@ -66,6 +66,18 @@ body {
   border-radius: 5px;
 }
 
+.bg-img {
+  background-image: url("https://res.cloudinary.com/daxmjqsy2/image/upload/v1680953850/blog_pb1yan.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.about {
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+  padding: 1.75rem;
+}
+
 .edit-link {
   transition: all 0.4s;
   padding: 2px 4px;

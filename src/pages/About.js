@@ -3,11 +3,11 @@ import Footer from "../components/Footer";
 
 const About = () => {
   return (
-    <div className="c-container">
-      <div className="container padding">
-        <div className="col-md-12">
+    <div className="c-container bg-img">
+      <div className="container padding ">
+        <div className="col-md-12 mt-5">
           <div className="row mx-0">
-            <p className="fw-medium fs-5">
+            <p className="fw-medium fs-5 text-white about">
               I finished building a blog website using React, Bootstrap, and
               Sass! I added some cool features to make it more interactive and
               user-friendly. I used Firebase authentication to allow users to
