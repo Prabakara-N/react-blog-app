@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { toast } from "react-toastify";
+import { UserInfo } from "../context/UserInfoContext";
 
 const initialState = {
   firstName: "",
@@ -22,6 +23,7 @@ const Auth = ({ setActive, setUser }) => {
   const [error, setError] = useState("");
 
   const { firstName, lastName, email, password, confirmPassword } = state;
+  const { clearUserData } = UserInfo();
 
   const navigate = useNavigate();
 
@@ -32,6 +34,7 @@ const Auth = ({ setActive, setUser }) => {
   const handleAuth = async (e) => {
     e.preventDefault();
     if (!signUp) {
+      clearUserData();
       // signup is false ...then user will be in signin page
       if (email && password) {
         try {
@@ -63,6 +66,7 @@ const Auth = ({ setActive, setUser }) => {
         return toast.error("Password doesn't match");
       }
       if (firstName && lastName && email && password) {
+        clearUserData();
         try {
           const { user } = await createUserWithEmailAndPassword(
             auth,

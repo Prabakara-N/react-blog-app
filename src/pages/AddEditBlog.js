@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ReactTagInput from "@pathofdev/react-tag-input";
 import "@pathofdev/react-tag-input/build/index.css";
+import ReactTagInput from "@pathofdev/react-tag-input";
 import { useNavigate, useParams } from "react-router-dom";
 // firebase
 import { db, storage } from "../firebase/firebase";
@@ -170,6 +170,7 @@ const AddEditBlog = ({ user, setActive }) => {
                   />
                 </div>
                 <div className="col-12 py-3">
+                  <small className="text-l">Note :Please type and enter</small>
                   <ReactTagInput
                     tags={tags}
                     placeholder="Tags"

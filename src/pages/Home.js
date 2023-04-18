@@ -30,7 +30,7 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const Home = ({ setActive, user, active }) => {
+const Home = ({ setActive, user, active, fetchUserDetails }) => {
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
   const [tags, setTags] = useState([]);
@@ -42,6 +42,11 @@ const Home = ({ setActive, user, active }) => {
   const queryString = useQuery();
   const searchQuery = queryString.get("searchQuery");
   const location = useLocation();
+
+  useEffect(() => {
+    fetchUserDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.uid, user]);
 
   const getTrendingBlogs = async () => {
     const blogRef = collection(db, "blogs");

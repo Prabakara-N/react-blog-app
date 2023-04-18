@@ -14,17 +14,32 @@ import Auth from "./pages/Auth";
 import Blogs from "./pages/Blogs";
 import TagBlog from "./pages/TagBlog";
 import CategoryBlog from "./pages/CategoryBlog";
+import AddProfile from "./pages/AddProfile";
+import UserProfile from "./pages/UserInfo";
+
 // components
 import Header from "./components/Header";
 import ScrollToTop from "./components/ScrollToTop";
 // fire base
-import { auth } from "./firebase/firebase";
+import { auth, db } from "./firebase/firebase";
 import { signOut } from "firebase/auth";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { UserInfo } from "./context/UserInfoContext";
 
 const App = () => {
   const [active, setActive] = useState("Home");
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+
+  const {
+    setUserName,
+    setImageAsset,
+    setEmail,
+    setNumber,
+    setBio,
+    setDocId,
+    setUserId,
+  } = UserInfo();
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
@@ -44,6 +59,31 @@ const App = () => {
     });
   };
 
+  // getting user profile
+  const fetchUserDetails = async () => {
+    if (user && user?.uid) {
+      const q = query(
+        collection(db, "userInfo"),
+        where("userId", "==", user?.uid)
+      );
+      const querySnapshot = await getDocs(q);
+
+      querySnapshot.docs.map((doc) => {
+        setDocId(doc.id);
+        const userData = doc.data();
+        if (userData) {
+          setUserId(userData.userId);
+          setUserName(userData.userName);
+          setImageAsset(userData.image);
+          setEmail(userData.email);
+          setNumber(userData.number);
+          setBio(userData.bio);
+        }
+        return doc.id;
+      });
+    }
+  };
+
   return (
     <div className="App">
       <Header
@@ -57,7 +97,14 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<Home setActive={setActive} active={active} user={user} />}
+          element={
+            <Home
+              fetchUserDetails={fetchUserDetails}
+              setActive={setActive}
+              active={active}
+              user={user}
+            />
+          }
         />
         <Route
           path="/search"
@@ -90,6 +137,14 @@ const App = () => {
           element={<CategoryBlog setActive={setActive} />}
         />
         <Route path="/about" element={<About />} />
+        <Route
+          path="/userinfo"
+          element={
+            <UserProfile fetchUserDetails={fetchUserDetails} user={user} />
+          }
+        />
+        <Route path="/addprofile" element={<AddProfile user={user} />} />
+        <Route path="/editprofile/:id" element={<AddProfile />} />
         <Route
           path="/auth"
           element={<Auth setActive={setActive} setUser={setUser} />}
