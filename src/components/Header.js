@@ -75,21 +75,25 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   {userId ? (
                     <>
-                      <div className="profile-logo">
-                        <img
-                          src="https://res.cloudinary.com/daxmjqsy2/image/upload/v1680174784/avatar_pbxti9.png"
-                          alt="logo"
-                          style={{
-                            width: "30px",
-                            height: "30px",
-                            borderRadius: "50%",
-                            marginTop: "12px",
-                          }}
-                        />
-                      </div>
-                      <p style={{ marginTop: "12px", marginLeft: "5px" }}>
-                        {user?.displayName}
-                      </p>
+                      <Link to={"/userinfo"}>
+                        <div className="profile-logo">
+                          <img
+                            src="https://res.cloudinary.com/daxmjqsy2/image/upload/v1680174784/avatar_pbxti9.png"
+                            alt="logo"
+                            style={{
+                              width: "30px",
+                              height: "30px",
+                              borderRadius: "50%",
+                              marginTop: "12px",
+                            }}
+                          />
+                        </div>
+                      </Link>
+                      <Link to={"/userinfo"}>
+                        <p style={{ marginTop: "12px", marginLeft: "5px" }}>
+                          {user?.displayName}
+                        </p>
+                      </Link>
                       <li
                         className="nav-item nav-link fw-bold"
                         onClick={handleLogout}
