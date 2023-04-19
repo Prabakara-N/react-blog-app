@@ -170,7 +170,9 @@ const AddEditBlog = ({ user, setActive }) => {
                   />
                 </div>
                 <div className="col-12 py-3">
-                  <small className="text-l">Note :Please type and enter</small>
+                  <p className="text-start fs-6 text-muted fw-bold">
+                    Note :Please type and enter for tags
+                  </p>
                   <ReactTagInput
                     tags={tags}
                     placeholder="Tags"

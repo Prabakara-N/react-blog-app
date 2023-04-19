@@ -7,7 +7,6 @@ const UserInfoContextProvider = ({ children }) => {
   const [imageAsset, setImageAsset] = useState(null);
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [number, setNumber] = useState("");
   const [bio, setBio] = useState("");
   const [docId, setDocId] = useState(null);
   const [userId, setUserId] = useState(null);
@@ -16,7 +15,6 @@ const UserInfoContextProvider = ({ children }) => {
     setImageAsset(null);
     setUserName("");
     setEmail("");
-    setNumber("");
     setBio("");
   };
 
@@ -28,8 +26,6 @@ const UserInfoContextProvider = ({ children }) => {
         setUserName,
         email,
         setEmail,
-        number,
-        setNumber,
         bio,
         setBio,
         imageAsset,

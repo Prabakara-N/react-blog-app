@@ -31,15 +31,8 @@ const App = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  const {
-    setUserName,
-    setImageAsset,
-    setEmail,
-    setNumber,
-    setBio,
-    setDocId,
-    setUserId,
-  } = UserInfo();
+  const { setUserName, setImageAsset, setEmail, setBio, setDocId, setUserId } =
+    UserInfo();
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
@@ -62,6 +55,7 @@ const App = () => {
   // getting user profile
   const fetchUserDetails = async () => {
     if (user && user?.uid) {
+      console.log(user.uid);
       const q = query(
         collection(db, "userInfo"),
         where("userId", "==", user?.uid)
@@ -71,12 +65,14 @@ const App = () => {
       querySnapshot.docs.map((doc) => {
         setDocId(doc.id);
         const userData = doc.data();
+        console.log(userData);
         if (userData) {
           setUserId(userData.userId);
-          setUserName(userData.userName);
+          setUserName(
+            userData.userName ? userData.userName : user?.displayName
+          );
           setImageAsset(userData.image);
           setEmail(userData.email);
-          setNumber(userData.number);
           setBio(userData.bio);
         }
         return doc.id;
@@ -140,11 +136,15 @@ const App = () => {
         <Route
           path="/userinfo"
           element={
-            <UserProfile fetchUserDetails={fetchUserDetails} user={user} />
+            <UserProfile
+              fetchUserDetails={fetchUserDetails}
+              user={user}
+              setActive={setActive}
+            />
           }
         />
         <Route path="/addprofile" element={<AddProfile user={user} />} />
-        <Route path="/editprofile/:id" element={<AddProfile />} />
+        <Route path="/editprofile/:id" element={<AddProfile user={user} />} />
         <Route
           path="/auth"
           element={<Auth setActive={setActive} setUser={setUser} />}

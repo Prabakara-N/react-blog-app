@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 // import { transitions } from "bootstrap";
 import { MdOutlineLogout } from "react-icons/md";
 import { HiLogin } from "react-icons/hi";
+import { UserInfo } from "../context/UserInfoContext";
 
 const Header = ({ active, setActive, user, handleLogout }) => {
   const userId = user?.uid;
+  const { userName } = UserInfo();
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid bg-faded padding-media">
@@ -89,9 +91,17 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                           />
                         </div>
                       </Link>
-                      <Link to={"/userinfo"}>
-                        <p style={{ marginTop: "12px", marginLeft: "5px" }}>
-                          {user?.displayName}
+                      <Link
+                        to={"/userinfo"}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        <p
+                          style={{
+                            marginTop: "12px",
+                            marginLeft: "5px",
+                          }}
+                        >
+                          {userName ? userName : user?.displayName}
                         </p>
                       </Link>
                       <li

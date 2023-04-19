@@ -57,6 +57,42 @@ body {
   pointer-events: none;
 }
 
+.add-pic {
+  width: 40px;
+  height: 40px;
+}
+
+.dp {
+  background-color: #282c34;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.user-card {
+  padding: 1rem;
+  width: 95%;
+  margin: 2rem auto;
+  border-radius: 5px;
+}
+
+.del {
+  border-radius: 50%;
+  border: none;
+  padding: 0 5px 5px 5px;
+  top: 3.75rem;
+}
+
+.email {
+  border-radius: 4px;
+}
+
+.bio {
+  height: 5rem;
+  border-radius: 4px;
+}
+
 .options {
   background-color: gainsboro;
   position: absolute;
@@ -241,6 +277,13 @@ body {
   .navbar-nav {
     flex-direction: row !important;
     margin-top: 15px;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .user-card {
+    width: 470px;
+    margin: 2rem auto;
   }
 }
 

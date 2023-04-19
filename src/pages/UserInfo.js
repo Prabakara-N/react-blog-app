@@ -5,66 +5,50 @@ import { Link } from "react-router-dom";
 import profile from "../assets/avatar.png";
 import { UserInfo } from "../context/UserInfoContext";
 
-const UserProfile = ({ user, fetchUserDetails }) => {
-  const { userName, email, number, bio, imageAsset, docId, userId } =
-    UserInfo();
+const UserProfile = ({ user, fetchUserDetails, setActive }) => {
+  const { userName, email, bio, imageAsset, docId, userId } = UserInfo();
 
   useEffect(() => {
     fetchUserDetails();
+    setActive(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, user?.uid]);
 
   return (
-    <>
-      <div className="bg-slate-800 w-full h-full flex flex-col min-h-screen justify-center items-center text-white">
-        <div className="bg-slate-900/50 rounded-lg p-6 w-[95%] sm:w-[450px] flex flex-col gap-y-8 mt-16">
+    <div className="container-fluid mb-4">
+      <div className="container">
+        <div className="user-card bg-light">
           {user && user?.uid === userId ? (
             <>
-              <div className="-mt-16">
+              <div className="my-2 dp mx-auto">
                 <img
                   src={`${imageAsset ? imageAsset : profile}`}
                   alt="profile"
-                  className="w-[100px] h-[100px] rounded-full mx-auto"
+                  className="dp"
                 />
               </div>
               <div className="text-center">
-                <p className="mb-2">Name :</p>
-                <h2 className="text-center text-lg font-medium bg-black/25 px-2 py-1 rounded-md capitalize inline">
-                  {userName}
-                </h2>
+                <p className="mb-2 fw-bold">Name :</p>
+                <h4 className="text-capitalize">
+                  {userName ? userName : user?.displayName}
+                </h4>
               </div>
-              <div className="flex flex-col gap-y-5 sm:flex-row sm:justify-between lg:items-center">
-                <div>
-                  <p className="mb-4 pl-2">Email :</p>
-                  <p className="text-center bg-black/25 px-2 py-2 rounded-md inline">
-                    {email}
-                  </p>
-                </div>
-                <div>
-                  <p className="mb-4 pl-2">Number :</p>
-                  <p className="text-center bg-black/25 px-2 py-2 rounded-md inline">
-                    {number}
-                  </p>
-                </div>
+              <div className="mt-2">
+                <p className="mb-1 pl-2 fw-bold">Email :</p>
+                <p className="text-center px-2 py-2 email bg-white">{email}</p>
               </div>
-              <div>
-                <p className="mb-2 pl-2">Address :</p>
-                <p className="bg-black/25 px-3 py-2 rounded-md">{bio}</p>
+              <div className="mt-2">
+                <p className="mb-2 pl-2 fw-bold">Bio :</p>
+                <p className="px-3 py-2 bg-white bio">{bio}</p>
               </div>
-              <div className="flex justify-between items-center">
+              <div className="d-flex justify-content-around align-items-center">
                 <Link to={`/editprofile/${docId}`}>
-                  <button
-                    type="button"
-                    className="bg-blue-700 inline-flex py-2 px-3 gap-2 rounded-lg hover:bg-blue-800 transition-all duration-200"
-                  >
+                  <button type="button" className="btn btn-dark">
                     Edit <AiFillEdit />
                   </button>
                 </Link>
-                <Link to={"/home"}>
-                  <button
-                    className="bg-blue-700 inline-flex py-2 px-3 gap-2 rounded-lg hover:bg-blue-800 transition-all duration-200"
-                    type="button"
-                  >
+                <Link to={"/"}>
+                  <button className="btn btn-success" type="button">
                     Done <MdDone />
                   </button>
                 </Link>
@@ -72,45 +56,30 @@ const UserProfile = ({ user, fetchUserDetails }) => {
             </>
           ) : (
             <>
-              <div className="-mt-16">
+              <div className="my-2 dp mx-auto">
                 <img
                   src={`${imageAsset ? imageAsset : profile}`}
                   alt="profile"
-                  className="w-[100px] h-[100px] rounded-full mx-auto"
+                  className="dp"
                 />
               </div>
-              <div className="text-center">
-                <p className="mb-2">Name :</p>
-                <h2 className="text-center text-lg font-medium bg-black/25 px-2 py-1 rounded-md w-[65%] mx-auto text-gray-500">
-                  nill
-                </h2>
-              </div>
-              <div className="flex justify-between items-center">
-                <div>
-                  <p className="mb-4 pl-2">Email :</p>
-                  <p className="text-center bg-black/25 px-2 py-2 pr-32 rounded-md inline text-gray-500">
-                    nill
-                  </p>
-                </div>
-                <div>
-                  <p className="mb-4 pl-2">Number :</p>
-                  <p className="text-center bg-black/25 px-2 pr-32 py-2 rounded-md inline text-gray-500">
-                    nill
-                  </p>
-                </div>
+              <div className="text-center mt-2">
+                <p className="mb-2 fw-bold">Name :</p>
+                <h4 className="text-center text-capitalize">
+                  {user?.displayName ? user?.displayName : userName}
+                </h4>
               </div>
               <div>
-                <p className="mb-2 pl-2">Address :</p>
-                <p className="bg-black/25 px-3 py-2 pb-16 rounded-md text-gray-500">
-                  nill
-                </p>
+                <p className="mb-2 pl-2 fw-bold">Email :</p>
+                <p className="text-center px-2 py-2 pr-32 email">nill</p>
               </div>
-              <div className="flex justify-between items-center">
+              <div>
+                <p className="mb-2 pl-2 fw-bold">Bio :</p>
+                <p className="text-center bio px-2 pr-32 py-2 bg-light">nill</p>
+              </div>
+              <div className="">
                 <Link to={`/addprofile`}>
-                  <button
-                    className="bg-blue-700 inline-flex py-2 px-3 gap-2 rounded-lg hover:bg-blue-800 transition-all duration-200"
-                    type="button"
-                  >
+                  <button className="btn btn-primary" type="button">
                     Add Profile <AiFillEdit />
                   </button>
                 </Link>
@@ -119,7 +88,7 @@ const UserProfile = ({ user, fetchUserDetails }) => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Loader from "../components/Spinner";
 
 import { FcAddImage } from "react-icons/fc";
-import { MdDelete, MdSaveAlt } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import { toast } from "react-toastify";
 
 import Tooltip from "react-bootstrap/Tooltip";
@@ -23,14 +23,13 @@ import { UserInfo } from "../context/UserInfoContext";
 
 const AddProfile = ({ user }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(null);
 
   const {
     userName,
     setUserName,
     email,
     setEmail,
-    number,
-    setNumber,
     bio,
     setBio,
     imageAsset,
@@ -75,7 +74,7 @@ const AddProfile = ({ user }) => {
           const uploadProgress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log(uploadProgress);
-          toast.promise("uploading...Please wait...");
+          setProgress(uploadProgress);
         },
         (error) => {
           toast.error(`Error while uploading : Try Again...`);
@@ -108,14 +107,13 @@ const AddProfile = ({ user }) => {
   // saving user details
   const saveDetails = async (e) => {
     e.preventDefault();
-    if (userName && email && number && bio && user?.uid) {
+    if ((userName && email) || (bio && user?.uid)) {
       if (!id) {
         try {
           await addDoc(collection(db, "userInfo"), {
             userName: userName,
             image: imageAsset,
             email: email,
-            number: number,
             bio: bio,
             userId: user.uid,
           });
@@ -129,7 +127,6 @@ const AddProfile = ({ user }) => {
             userName: userName,
             image: imageAsset,
             email: email,
-            number: number,
             bio: bio,
             userId: user.uid,
           });
@@ -145,101 +142,102 @@ const AddProfile = ({ user }) => {
   };
 
   return (
-    <div className="bg-slate-800 w-full h-full flex flex-col min-h-screen justify-center items-center text-white">
-      <div className="p-6 rounded-lg bg-slate-900/30 w-[95%] sm:w-[450px]">
-        <form onSubmit={saveDetails} className="flex flex-col gap-y-8">
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <>
-              {!imageAsset ? (
-                <>
-                  <label htmlFor="profile">
-                    <OverlayTrigger
-                      placement="right"
-                      delay={{ show: 200, hide: 100 }}
-                      overlay={tooltipRender}
-                    >
-                      <div className="w-[100px] h-[100px] mx-auto bg-black/60 rounded-full flex items-center justify-center -mt-20 cursor-pointer">
-                        <FcAddImage className="w-[45px] h-[45px]  " />
-                      </div>
-                    </OverlayTrigger>
-                    <input
-                      type="file"
-                      id="profile"
-                      onChange={uploadProfile}
-                      accept="image/*"
-                      className="hidden"
-                    />
-                  </label>
-                </>
-              ) : (
-                <>
-                  <div className="w-[100px] h-[100px] mx-auto bg-black/60 rounded-full flex items-center justify-center -mt-20 relative">
-                    <img
-                      src={imageAsset}
-                      alt="profile-pic"
-                      className="w-[100px] h-[100px] rounded-full"
-                    />
-                    <OverlayTrigger
-                      placement="right"
-                      delay={{ show: 200, hide: 100 }}
-                      overlay={renderTooltip}
-                    >
-                      <button
-                        type="button"
-                        className="absolute bottom-1 right-1 p-1 rounded-full bg-black/70 text-xl cursor-pointer outline-none hover:shadow-md hover:bg-red-600 duration-500 transition-all ease-in-out"
-                        onClick={deleteImage}
-                      >
-                        <MdDelete className="text-white" />
-                      </button>
-                    </OverlayTrigger>
-                  </div>
-                </>
-              )}
-            </>
-          )}
-
-          <input
-            type="text"
-            placeholder="User Name"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-            className="py-3 capitalize rounded pl-3 bg-slate-700"
-            required
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="py-3 rounded pl-3 bg-slate-700"
-            required
-          />
-          <input
-            type="number"
-            placeholder="Mobile Number"
-            value={number}
-            onChange={(e) => setNumber(e.target.value)}
-            className="py-3 rounded pl-3 bg-slate-700"
-          />
-          <textarea
-            type="text"
-            placeholder="Address"
-            value={bio}
-            rows={3}
-            onChange={(e) => setBio(e.target.value)}
-            className="py-3 rounded pl-3 bg-slate-700"
-          />
-          <div>
-            <button
-              type="submit"
-              className="bg-blue-700 py-2 px-3 rounded-lg font-medium inline-flex gap-x-2 items-center"
-            >
-              Save <MdSaveAlt />
-            </button>
+    <div className="container-fluid mb-4">
+      <div className="container">
+        <div className="col-12">
+          <div className="text-center heading py-2">
+            {id ? "Update Profile" : "Add Profile"}
           </div>
-        </form>
+        </div>
+        <div className="row h-100 justify-content-center align-items-center">
+          <div className="col-10 col-md-8 col-lg-6">
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <>
+                {!imageAsset ? (
+                  <>
+                    <label htmlFor="profile">
+                      <OverlayTrigger
+                        placement="right"
+                        delay={{ show: 200, hide: 100 }}
+                        overlay={tooltipRender}
+                      >
+                        <div className="dp w-[100px] h-[100px] mx-auto d-flex align-items-center justify-content-center cursor-pointer">
+                          <FcAddImage className="add-pic" />
+                        </div>
+                      </OverlayTrigger>
+                      <input
+                        type="file"
+                        id="profile"
+                        onChange={uploadProfile}
+                        accept="image/*"
+                        className="d-none"
+                      />
+                    </label>
+                  </>
+                ) : (
+                  <>
+                    <div className="position-relative ">
+                      <img src={imageAsset} alt="profile-pic" className="dp" />
+                      <OverlayTrigger
+                        placement="right"
+                        delay={{ show: 200, hide: 100 }}
+                        overlay={renderTooltip}
+                      >
+                        <button
+                          type="button"
+                          className="position-absolute del"
+                          onClick={deleteImage}
+                        >
+                          <MdDelete className="text-dark " />
+                        </button>
+                      </OverlayTrigger>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+            <form className="row blog-form" onSubmit={saveDetails}>
+              <div className="col-12 py-3">
+                <input
+                  type="text"
+                  className="form-control input-text-box text-capitalize"
+                  placeholder="UserName"
+                  name="title"
+                  value={user?.displayName ? user?.displayName : userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                />
+              </div>
+              <div className="col-12 py-3">
+                <input
+                  type="text"
+                  className="form-control input-text-box"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="col-12 py-3">
+                <textarea
+                  className="form-control description-box"
+                  placeholder="About Me"
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
+                />
+              </div>
+              <div className="col-12 py-3 text-center">
+                <button
+                  className="btn btn-add"
+                  type="submit"
+                  disabled={progress !== null && progress < 100}
+                >
+                  {id ? "Update" : "Submit"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );
