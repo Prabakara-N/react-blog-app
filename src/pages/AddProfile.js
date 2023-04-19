@@ -107,7 +107,7 @@ const AddProfile = ({ user }) => {
   // saving user details
   const saveDetails = async (e) => {
     e.preventDefault();
-    if ((userName && email) || (bio && user?.uid)) {
+    if ((userName || user?.displayName) && email && bio && user?.uid) {
       if (!id) {
         try {
           await addDoc(collection(db, "userInfo"), {
@@ -205,7 +205,7 @@ const AddProfile = ({ user }) => {
                   className="form-control input-text-box text-capitalize"
                   placeholder="UserName"
                   name="title"
-                  value={user?.displayName ? user?.displayName : userName}
+                  value={userName}
                   onChange={(e) => setUserName(e.target.value)}
                 />
               </div>

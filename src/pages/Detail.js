@@ -32,7 +32,7 @@ import Footer from "../components/Footer";
 const Detail = ({ setActive, user }) => {
   const userId = user?.uid;
   const { id } = useParams();
-  console.log(id);
+
   const [loading, setLoading] = useState(false);
   const [blog, setBlog] = useState(null);
   const [blogs, setBlogs] = useState([]);

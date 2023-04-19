@@ -21,7 +21,7 @@ const UserComments = ({
   msg,
 }) => {
   const { id } = useParams();
-  const { imageAsset } = UserInfo();
+  const { imageAsset, userName } = UserInfo();
 
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
@@ -67,8 +67,8 @@ const UserComments = ({
                   </div>
                   <div className="d-flex gap-4">
                     <div className="media-body">
-                      <h3 className="text-start media-heading user_name">
-                        {name}{" "}
+                      <h3 className="text-start media-heading user_name text-capitalize">
+                        {`${user && userId === user.uid ? userName : name}`}
                         <small>{createdAt.toDate().toDateString()}</small>
                       </h3>
                       <p className="text-start">{body}</p>

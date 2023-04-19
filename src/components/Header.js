@@ -97,12 +97,13 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                         style={{ textDecoration: "none", color: "black" }}
                       >
                         <p
+                          className="text-capitalize"
                           style={{
                             marginTop: "12px",
                             marginLeft: "5px",
                           }}
                         >
-                          {userName ? userName : user?.displayName}
+                          {userName ? userName : user.displayName}
                         </p>
                       </Link>
                       <li
