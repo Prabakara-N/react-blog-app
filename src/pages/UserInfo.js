@@ -71,11 +71,13 @@ const UserProfile = ({ user, fetchUserDetails, setActive }) => {
               </div>
               <div>
                 <p className="mb-2 pl-2 fw-bold">Email :</p>
-                <p className="text-center px-2 py-2 pr-32 email">nill</p>
+                <p className="text-center px-2 py-2 pr-32 bg-white email">
+                  nill
+                </p>
               </div>
               <div>
                 <p className="mb-2 pl-2 fw-bold">Bio :</p>
-                <p className="text-center bio px-2 pr-32 py-2 bg-light">nill</p>
+                <p className="text-center bio px-2 pr-32 py-2 bg-white">nill</p>
               </div>
               <div className="">
                 <Link to={`/addprofile`}>

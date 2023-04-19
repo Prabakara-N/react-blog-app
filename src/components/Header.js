@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import { MdOutlineLogout } from "react-icons/md";
 import { HiLogin } from "react-icons/hi";
 import { UserInfo } from "../context/UserInfoContext";
+import userProfile from "../assets/avatar.png";
 
 const Header = ({ active, setActive, user, handleLogout }) => {
   const userId = user?.uid;
-  const { userName } = UserInfo();
+  const { userName, imageAsset } = UserInfo();
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid bg-faded padding-media">
@@ -80,7 +81,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                       <Link to={"/userinfo"}>
                         <div className="profile-logo">
                           <img
-                            src="https://res.cloudinary.com/daxmjqsy2/image/upload/v1680174784/avatar_pbxti9.png"
+                            src={`${imageAsset ? imageAsset : userProfile}`}
                             alt="logo"
                             style={{
                               width: "30px",

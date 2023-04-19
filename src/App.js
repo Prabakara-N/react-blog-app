@@ -55,7 +55,6 @@ const App = () => {
   // getting user profile
   const fetchUserDetails = async () => {
     if (user && user?.uid) {
-      console.log(user.uid);
       const q = query(
         collection(db, "userInfo"),
         where("userId", "==", user?.uid)
@@ -65,7 +64,6 @@ const App = () => {
       querySnapshot.docs.map((doc) => {
         setDocId(doc.id);
         const userData = doc.data();
-        console.log(userData);
         if (userData) {
           setUserId(userData.userId);
           setUserName(

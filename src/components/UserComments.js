@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import { MdDelete } from "react-icons/md";
 import Tooltip from "react-bootstrap/Tooltip";
 import { OverlayTrigger } from "react-bootstrap";
+import { UserInfo } from "../context/UserInfoContext";
+import userProfile from "../assets/avatar.png";
 
 const UserComments = ({
   blog,
@@ -19,6 +21,7 @@ const UserComments = ({
   msg,
 }) => {
   const { id } = useParams();
+  const { imageAsset } = UserInfo();
 
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
@@ -51,7 +54,9 @@ const UserComments = ({
                 <>
                   <div className="media-left">
                     <img
-                      src="https://res.cloudinary.com/daxmjqsy2/image/upload/v1680174784/avatar_pbxti9.png"
+                      src={`${
+                        user && userId === user.uid ? imageAsset : userProfile
+                      }`}
                       alt="user"
                       className="rounded-circle"
                       style={{
