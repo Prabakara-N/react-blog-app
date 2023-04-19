@@ -79,7 +79,7 @@ const UserProfile = ({ user, fetchUserDetails, setActive }) => {
                 <p className="mb-2 pl-2 fw-bold">Bio :</p>
                 <p className="text-center bio px-2 pr-32 py-2 bg-white">nill</p>
               </div>
-              <div className="">
+              <div>
                 <Link to={`/addprofile`}>
                   <button className="btn btn-primary" type="button">
                     Add Profile <AiFillEdit />
