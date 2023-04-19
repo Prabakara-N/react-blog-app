@@ -171,7 +171,7 @@ const AddEditBlog = ({ user, setActive }) => {
                 </div>
                 <div className="col-12 py-3">
                   <p className="text-start fs-6 text-muted fw-bold">
-                    Note :Please type and enter for tags
+                    Note :Please type and press enter for tags
                   </p>
                   <ReactTagInput
                     tags={tags}
