@@ -42,6 +42,7 @@ const Home = ({ setActive, user, active, fetchUserDetails }) => {
   const queryString = useQuery();
   const searchQuery = queryString.get("searchQuery");
   const location = useLocation();
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     fetchUserDetails();
@@ -166,17 +167,15 @@ const Home = ({ setActive, user, active, fetchUserDetails }) => {
     return <Spinner />;
   }
 
-  // delete
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you wanted to delete this blog ?")) {
-      try {
-        setLoading(true);
-        await deleteDoc(doc(db, "blogs", id));
-        toast.success("Blog deleted successfully");
-        setLoading(false);
-      } catch (err) {
-        console.log(err);
-      }
+    try {
+      setLoading(true);
+      await deleteDoc(doc(db, "blogs", id));
+      toast.success("Blog deleted successfully");
+      setLoading(false);
+      setShow(false);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -230,6 +229,8 @@ const Home = ({ setActive, user, active, fetchUserDetails }) => {
                 <BlogSection
                   key={blog.id}
                   user={user}
+                  show={show}
+                  setShow={setShow}
                   handleDelete={handleDelete}
                   {...blog}
                 />

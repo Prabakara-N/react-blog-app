@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { excerpt } from "../utils";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 // icons
 import { MdDelete } from "react-icons/md";
 import { RiEdit2Fill } from "react-icons/ri";
@@ -18,6 +20,8 @@ const BlogSection = ({
   timestamp,
   user,
   handleDelete,
+  show,
+  setShow,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -60,16 +64,38 @@ const BlogSection = ({
               </div>
               {isOpen && (
                 <div className="options">
-                  <div
-                    className="d-flex gap-1 mb-2 edit-link"
-                    style={{
-                      cursor: "pointer",
-                    }}
-                    onClick={() => handleDelete(id)}
-                  >
-                    <MdDelete className="trash" />
-                    Delete
-                  </div>
+                  <>
+                    <div
+                      className="d-flex gap-1 mb-2 edit-link"
+                      style={{
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setShow(true)}
+                    >
+                      <MdDelete className="trash" />
+                      Delete
+                    </div>
+
+                    <Modal show={show} onHide={() => setShow(false)}>
+                      <Modal.Body>
+                        Are you sure you wanted to delete this blog ?{" "}
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button
+                          variant="secondary"
+                          onClick={() => setShow(false)}
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          variant="primary"
+                          onClick={() => handleDelete(id)}
+                        >
+                          Delete
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </>
                   <Link
                     className="d-flex gap-1 edit-link"
                     to={`/update/${id}`}
