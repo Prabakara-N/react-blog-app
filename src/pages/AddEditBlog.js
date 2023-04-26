@@ -79,7 +79,6 @@ const AddEditBlog = ({ user, setActive }) => {
         }
       );
     };
-
     file && uploadFile();
   }, [file]);
 
@@ -115,7 +114,7 @@ const AddEditBlog = ({ user, setActive }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (title && tags && title && description && trending) {
+    if (title && tags && title && category && description && trending) {
       if (!id) {
         try {
           await addDoc(collection(db, "blogs"), {
@@ -162,7 +161,7 @@ const AddEditBlog = ({ user, setActive }) => {
                 <div className="col-12 py-3">
                   <input
                     type="text"
-                    className="form-control input-text-box"
+                    className="form-control input-text-box text-capitalize"
                     placeholder="Title"
                     name="title"
                     value={title}
@@ -174,7 +173,7 @@ const AddEditBlog = ({ user, setActive }) => {
                     Note :Please type and press enter for tags
                   </p>
                   <ReactTagInput
-                    tags={tags}
+                    tags={tags.length > 0 ? tags : tags.push("blog")}
                     placeholder="Tags"
                     onChange={handleTags}
                   />
@@ -222,11 +221,11 @@ const AddEditBlog = ({ user, setActive }) => {
                   <select
                     value={category}
                     onChange={onCategoryChange}
-                    className="catg-dropdown"
+                    className="catg-dropdown px-2"
                   >
                     <option>Please select category</option>
                     {categoryOption.map((option, index) => (
-                      <option value={option || ""} key={index}>
+                      <option value={option} key={index}>
                         {option}
                       </option>
                     ))}

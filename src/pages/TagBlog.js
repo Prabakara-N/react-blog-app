@@ -41,7 +41,7 @@ const TagBlog = ({ setActive }) => {
             Tag: <strong>{tag.toLocaleUpperCase()}</strong>
           </div>
           {tagBlogs?.map((item) => (
-            <div className="col-md-6">
+            <div className="col-md-6" key={item.id}>
               <BlogSection key={item.id} {...item} />
             </div>
           ))}

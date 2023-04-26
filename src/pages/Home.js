@@ -170,8 +170,8 @@ const Home = ({ setActive, user, active, fetchUserDetails }) => {
   const handleDelete = async (id) => {
     try {
       setLoading(true);
-      await deleteDoc(doc(db, "blogs", id));
       toast.success("Blog deleted successfully");
+      await deleteDoc(doc(db, "blogs", id));
       setLoading(false);
       setShow(false);
     } catch (err) {
