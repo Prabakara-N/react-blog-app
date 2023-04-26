@@ -296,7 +296,6 @@ body {
 
 @media screen and (max-width: 425px) {
   .like-span {
-    /* display: flex; */
     flex-direction: column;
     align-items: center;
   }
