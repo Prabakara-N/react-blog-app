@@ -173,7 +173,7 @@ const AddEditBlog = ({ user, setActive }) => {
                     Note :Please type and press enter for tags
                   </p>
                   <ReactTagInput
-                    tags={tags?.length > 0 ? tags : tags.push("blog")}
+                    tags={tags}
                     placeholder="Tags"
                     onChange={handleTags}
                   />
@@ -243,6 +243,7 @@ const AddEditBlog = ({ user, setActive }) => {
                 <div className="mb-3">
                   <input
                     type="file"
+                    accept="image/*"
                     className="form-control"
                     onChange={(e) => setFile(e.target.files[0])}
                   />

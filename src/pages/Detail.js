@@ -79,9 +79,13 @@ const Detail = ({ setActive, user }) => {
     let uniqueTags = [...new Set(tags)];
     setTags(uniqueTags);
     setBlog(blogDetail.data());
+    const myTags =
+      Array.isArray(blogDetail.data().tags) && blogDetail.data().tags.length > 0
+        ? blogDetail.data().tags
+        : ["default"];
     const relatedBlogsQuery = query(
       blogRef,
-      where("tags", "array-contains-any", blogDetail.data().tags, limit(3))
+      where("tags", "array-contains-any", myTags, limit(3))
     );
     setComments(blogDetail.data().comments ? blogDetail.data().comments : []);
     setLikes(blogDetail.data().likes ? blogDetail.data().likes : []);
@@ -149,7 +153,7 @@ const Detail = ({ setActive, user }) => {
           <div className="overlay"></div>
           <div className="blog-title">
             <span>{blog?.timestamp.toDate().toDateString()}</span>
-            <h2>{blog?.title}</h2>
+            <h2 className="text-capitalize">{blog?.title}</h2>
           </div>
         </div>
         <div className="container-fluid pb-4 pt-4 padding blog-single-content">
