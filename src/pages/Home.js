@@ -167,18 +167,6 @@ const Home = ({ setActive, user, active, fetchUserDetails }) => {
     return <Spinner />;
   }
 
-  // const handleDelete = async (id) => {
-  //   try {
-  //     setLoading(true);
-  //     toast.success("Blog deleted successfully");
-  //     await deleteDoc(doc(db, "blogs", id));
-  //     setLoading(false);
-  //     setShow(false);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   const handleDelete = async (id) => {
     try {
       setLoading(true);
