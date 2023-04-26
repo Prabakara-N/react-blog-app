@@ -78,7 +78,7 @@ const BlogSection = ({
                     </div>
 
                     <Modal show={show} onHide={() => setShow(false)}>
-                      <Modal.Body>
+                      <Modal.Body className="delete-modal">
                         Are you sure you wanted to delete this blog ?{" "}
                       </Modal.Body>
                       <Modal.Footer>

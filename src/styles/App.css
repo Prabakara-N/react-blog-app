@@ -293,3 +293,9 @@ body {
     max-height: 88vh;
   }
 }
+
+@media screen and (max-width: 370px) {
+  .delete-modal {
+    font-size: 0.9rem;
+  }
+}

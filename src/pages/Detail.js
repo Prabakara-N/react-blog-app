@@ -40,7 +40,7 @@ const Detail = ({ setActive, user }) => {
   const [blogs, setBlogs] = useState([]);
   const [tags, setTags] = useState([]);
   const [comments, setComments] = useState([]);
-  let [likes, setLikes] = useState([]);
+  const [likes, setLikes] = useState([]);
   const [userComment, setUserComment] = useState("");
   const [relatedBlogs, setRelatedBlogs] = useState([]);
 
@@ -123,19 +123,17 @@ const Detail = ({ setActive, user }) => {
 
   const handleLike = async () => {
     if (userId) {
-      if (blog?.likes) {
-        const index = likes.findIndex((id) => id === userId);
-        if (index === -1) {
-          likes.push(userId);
-          setLikes([...new Set(likes)]);
-        } else {
-          likes = likes.filter((id) => id !== userId);
-          setLikes(likes);
-        }
+      let newLikes = [...likes];
+      const index = newLikes.findIndex((id) => id === userId);
+      if (index === -1) {
+        newLikes.push(userId);
+      } else {
+        newLikes = newLikes.filter((id) => id !== userId);
       }
+      setLikes(newLikes);
       await updateDoc(doc(db, "blogs", id), {
         ...blog,
-        likes,
+        likes: newLikes,
         timestamp: serverTimestamp(),
       });
     }
