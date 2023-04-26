@@ -158,10 +158,18 @@ const Detail = ({ setActive, user }) => {
           <div className="container padding">
             <div className="row mx-0">
               <div className="col-md-8">
-                <span className="meta-info text-start">
-                  By <p className="author">{blog?.author}</p> -&nbsp;
-                  {blog?.timestamp.toDate().toDateString()} <FcCalendar />
-                  <Like handleLike={handleLike} likes={likes} userId={userId} />
+                <span className="meta-info detail-name text-start d-flex like-span align-item-center justify-content-between">
+                  <div>
+                    By <p className="author">{blog?.author}</p> -&nbsp;
+                    {blog?.timestamp.toDate().toDateString()} <FcCalendar />
+                  </div>
+                  <div className="likes-com">
+                    <Like
+                      handleLike={handleLike}
+                      likes={likes}
+                      userId={userId}
+                    />
+                  </div>
                 </span>
                 <p className="text-start">{blog?.description}</p>
                 <div className="text-start">

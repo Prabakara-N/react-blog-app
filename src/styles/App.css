@@ -294,8 +294,24 @@ body {
   }
 }
 
+@media screen and (max-width: 425px) {
+  .like-span {
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .likes-com {
+    margin-bottom: 0.5rem;
+  }
+}
+
 @media screen and (max-width: 370px) {
   .delete-modal {
     font-size: 0.95rem;
+  }
+
+  .detail-name {
+    font-size: 0.8rem;
   }
 }

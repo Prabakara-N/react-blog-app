@@ -36,6 +36,7 @@ const Like = ({ handleLike, likes, userId }) => {
   return (
     <>
       <span
+        className="like-btn"
         style={{ float: "right", cursor: "pointer", marginTop: "-7px" }}
         onClick={!userId ? null : handleLike}
       >
