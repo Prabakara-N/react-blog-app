@@ -167,6 +167,18 @@ const Home = ({ setActive, user, active, fetchUserDetails }) => {
     return <Spinner />;
   }
 
+  // const handleDelete = async (id) => {
+  //   try {
+  //     setLoading(true);
+  //     toast.success("Blog deleted successfully");
+  //     await deleteDoc(doc(db, "blogs", id));
+  //     setLoading(false);
+  //     setShow(false);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
   const handleDelete = async (id) => {
     try {
       setLoading(true);
@@ -174,6 +186,8 @@ const Home = ({ setActive, user, active, fetchUserDetails }) => {
       await deleteDoc(doc(db, "blogs", id));
       setLoading(false);
       setShow(false);
+      // Remove the deleted document from the UI list
+      setBlogs((prevBlogs) => prevBlogs.filter((blog) => blog.id !== id));
     } catch (err) {
       console.log(err);
     }
