@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { FcCalendar } from "react-icons/fc";
+import NoBlog from "../assets/blog.jpg";
 // firebase
 import {
   collection,
@@ -28,6 +29,7 @@ import Tags from "../components/Tags";
 import UserComments from "../components/UserComments";
 import Spinner from "../components/Spinner";
 import Footer from "../components/Footer";
+import { MdModeComment } from "react-icons/md";
 
 const Detail = ({ setActive, user }) => {
   const userId = user?.uid;
@@ -140,7 +142,9 @@ const Detail = ({ setActive, user }) => {
       <div className="single">
         <div
           className="blog-title-box"
-          style={{ backgroundImage: `url('${blog?.imgUrl}')` }}
+          style={{
+            backgroundImage: `url(${blog?.imgUrl || NoBlog})`,
+          }}
         >
           <div className="overlay"></div>
           <div className="blog-title">
@@ -165,7 +169,7 @@ const Detail = ({ setActive, user }) => {
                 <div className="custombox">
                   <div className="scroll">
                     <h4 className="small-title bg-success">
-                      {comments?.length} Comment
+                      {comments?.length} Comment <MdModeComment />
                     </h4>
                     {isEmpty(comments) ? (
                       <UserComments

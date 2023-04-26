@@ -173,7 +173,7 @@ const AddEditBlog = ({ user, setActive }) => {
                     Note :Please type and press enter for tags
                   </p>
                   <ReactTagInput
-                    tags={tags.length > 0 ? tags : tags.push("blog")}
+                    tags={tags?.length > 0 ? tags : tags.push("blog")}
                     placeholder="Tags"
                     onChange={handleTags}
                   />

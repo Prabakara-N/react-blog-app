@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { excerpt } from "../utils";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import NoBlog from "../assets/blog.jpg";
 // icons
 import { MdDelete } from "react-icons/md";
 import { RiEdit2Fill } from "react-icons/ri";
@@ -31,7 +32,7 @@ const BlogSection = ({
         <div className="col-md-5">
           <div className="hover-blogs-img">
             <div className="blogs-img">
-              <img src={imgUrl} alt={title} />
+              <img src={imgUrl || NoBlog} alt={title} />
               <div></div>
             </div>
           </div>

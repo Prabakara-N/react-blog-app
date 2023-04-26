@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import NoBlog from "../assets/blog.jpg";
 
 const FeatureBlogs = ({ blogs, title }) => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const FeatureBlogs = ({ blogs, title }) => {
         >
           <div className="col-5 align-self-center">
             <img
-              src={item.imgUrl}
+              src={item.imgUrl || NoBlog}
               alt={item.title}
               className="most-popular-img"
             />

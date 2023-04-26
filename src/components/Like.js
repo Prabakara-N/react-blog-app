@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Tooltip } from "bootstrap";
+import { AiOutlineLike, AiTwotoneLike } from "react-icons/ai";
 
 const Like = ({ handleLike, likes, userId }) => {
   useEffect(() => {
@@ -15,19 +16,19 @@ const Like = ({ handleLike, likes, userId }) => {
     if (likes?.length > 0) {
       return likes.find((id) => id === userId) ? (
         <>
-          <i className="bi bi-hand-thumbs-up-fill" />
+          <AiTwotoneLike />
           &nbsp;{likes.length} {likes.length === 1 ? "Like" : "Likes"}
         </>
       ) : (
         <>
-          <i className="bi bi-hand-thumbs-up" />
+          <AiOutlineLike />
           &nbsp;{likes.length} {likes.length === 1 ? "Like" : "Likes"}
         </>
       );
     }
     return (
       <>
-        <i className="bi bi-hand-thumbs-up" />
+        <AiOutlineLike />
         &nbsp;Like
       </>
     );
