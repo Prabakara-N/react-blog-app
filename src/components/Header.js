@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { transitions } from "bootstrap";
 import { MdOutlineLogout } from "react-icons/md";
 import { HiLogin } from "react-icons/hi";
@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 const Header = ({ active, setActive, user, handleLogout }) => {
   const userId = user?.uid;
   const { userName, imageAsset } = UserInfo();
+  const navigate = useNavigate();
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid bg-faded padding-media">
@@ -69,9 +70,11 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                     className={`nav-item nav-link fw-semibold ${
                       active === "create" ? "active" : ""
                     }`}
-                    onClick={() =>
-                      toast.error("Please log in to create your blog")
-                    }
+                    onClick={() => {
+                      toast.error("Please log in to create your blog");
+                      navigate("/auth");
+                      setActive("login");
+                    }}
                   >
                     Create
                   </li>
