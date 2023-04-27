@@ -71,7 +71,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                       active === "create" ? "active" : ""
                     }`}
                     onClick={() => {
-                      toast.error("Please log in to create your blog");
+                      toast.error("Please log-in to create your blog");
                       navigate("/auth");
                       setActive("login");
                     }}
