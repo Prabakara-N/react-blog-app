@@ -3,7 +3,7 @@ import "./style.scss";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // routes
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 // pages
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
@@ -108,21 +108,10 @@ const App = () => {
           path="/detail/:id"
           element={<Detail setActive={setActive} user={user} />}
         />
-        <Route
-          path="/create"
-          element={
-            user?.uid ? <AddEditBlog user={user} /> : <Navigate to="/" />
-          }
-        />
+        <Route path="/create" element={<AddEditBlog user={user} />} />
         <Route
           path="/update/:id"
-          element={
-            user?.uid ? (
-              <AddEditBlog user={user} setActive={setActive} />
-            ) : (
-              <Navigate to="/" />
-            )
-          }
+          element={<AddEditBlog user={user} setActive={setActive} />}
         />
         <Route path="/blogs" element={<Blogs setActive={setActive} />} />
         <Route path="/tag/:tag" element={<TagBlog setActive={setActive} />} />

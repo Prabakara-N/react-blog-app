@@ -5,6 +5,7 @@ import { MdOutlineLogout } from "react-icons/md";
 import { HiLogin } from "react-icons/hi";
 import { UserInfo } from "../context/UserInfoContext";
 import userProfile from "../assets/avatar.png";
+import { toast } from "react-toastify";
 
 const Header = ({ active, setActive, user, handleLogout }) => {
   const userId = user?.uid;
@@ -52,16 +53,29 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                   </li>
                 </Link>
 
-                <Link to="/create" style={{ textDecoration: "none" }}>
+                {user ? (
+                  <Link to="/create" style={{ textDecoration: "none" }}>
+                    <li
+                      className={`nav-item nav-link fw-semibold ${
+                        active === "create" ? "active" : ""
+                      }`}
+                      onClick={() => setActive("create")}
+                    >
+                      Create
+                    </li>
+                  </Link>
+                ) : (
                   <li
                     className={`nav-item nav-link fw-semibold ${
                       active === "create" ? "active" : ""
                     }`}
-                    onClick={() => setActive("create")}
+                    onClick={() =>
+                      toast.error("Please log in to create your blog")
+                    }
                   >
                     Create
                   </li>
-                </Link>
+                )}
 
                 <Link to="/about" style={{ textDecoration: "none" }}>
                   <li
