@@ -179,7 +179,7 @@ const Detail = ({ setActive, user }) => {
                 <div className="custombox">
                   <div className="scroll">
                     <h4 className="small-title bg-success">
-                      {comments?.length} Comment <MdModeComment />
+                      {comments?.length} Comments <MdModeComment />
                     </h4>
                     {isEmpty(comments) ? (
                       <UserComments
