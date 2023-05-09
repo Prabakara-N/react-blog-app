@@ -3,7 +3,7 @@ import Loader from "../components/Spinner";
 
 import { FcAddImage } from "react-icons/fc";
 import { MdDelete } from "react-icons/md";
-import { toast } from "react-toastify";
+import { Slide, toast } from "react-toastify";
 
 import Tooltip from "react-bootstrap/Tooltip";
 import { OverlayTrigger } from "react-bootstrap";
@@ -67,14 +67,32 @@ const AddProfile = ({ user }) => {
       const imageFile = e.target.files[0];
       const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`);
       const uploadTask = uploadBytesResumable(storageRef, imageFile);
+      const toastId = toast.info("Uploading...", { autoClose: false });
 
       uploadTask.on(
         "state_changed",
         (snapshot) => {
           const uploadProgress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(uploadProgress);
           setProgress(uploadProgress);
+          if (uploadProgress === 100) {
+            toast.update(toastId, {
+              render: `${uploadProgress.toFixed(0)}% Uploaded`,
+              type: toast.TYPE.SUCCESS,
+              position: "top-right",
+              transition: Slide,
+              autoClose: false,
+            });
+          } else {
+            // If upload is still in progress, update the toast message with the current progress
+            toast.update(toastId, {
+              render: `${uploadProgress.toFixed(0)}% Uploading...`,
+              type: toast.TYPE.INFO,
+              position: "top-right",
+              transition: Slide,
+              autoClose: false,
+            });
+          }
         },
         (error) => {
           toast.error(`Error while uploading : Try Again...`);
@@ -87,6 +105,7 @@ const AddProfile = ({ user }) => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setImageAsset(downloadURL);
             setIsLoading(false);
+            toast.dismiss(toastId);
             toast.success("Image uploaded successfully...!");
           });
         }
