@@ -91,6 +91,7 @@ const AddProfile = ({ user }) => {
               position: "top-right",
               transition: Slide,
               autoClose: false,
+              closeOnClick: false,
             });
           }
         },

@@ -98,14 +98,9 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                       <Link to={"/userinfo"}>
                         <div className="profile-logo">
                           <img
-                            src={`${imageAsset ? imageAsset : userProfile}`}
+                            src={`${imageAsset || userProfile}`}
                             alt="logo"
-                            style={{
-                              width: "30px",
-                              height: "30px",
-                              borderRadius: "50%",
-                              marginTop: "12px",
-                            }}
+                            className="profile-img-header"
                           />
                         </div>
                       </Link>
@@ -120,7 +115,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                             marginLeft: "5px",
                           }}
                         >
-                          {userName ? userName : user.displayName}
+                          {userName || user.displayName}
                         </p>
                       </Link>
                       <li

@@ -58,11 +58,7 @@ const UserComments = ({
                         user && userId === user.uid ? imageAsset : userProfile
                       }`}
                       alt="user"
-                      className="rounded-circle"
-                      style={{
-                        width: "45px",
-                        height: "45px",
-                      }}
+                      className="rounded-circle profile-img-comment"
                     />
                   </div>
                   <div className="d-flex gap-4">

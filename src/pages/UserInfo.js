@@ -30,7 +30,7 @@ const UserProfile = ({ user, fetchUserDetails, setActive }) => {
               <div className="text-center">
                 <p className="mb-2 fw-bold">Name :</p>
                 <h4 className="text-capitalize">
-                  {userName ? userName : user?.displayName}
+                  {userName || user?.displayName}
                 </h4>
               </div>
               <div className="mt-2">
