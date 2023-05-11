@@ -58,8 +58,6 @@ body {
 }
 
 .profile-img-header {
-  aspect-ratio: 3/3;
-  object-fit: contain;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -67,10 +65,8 @@ body {
 }
 
 .profile-img-comment {
-  width: 45%;
-  height: 45%;
-  aspect-ratio: 3/3;
-  object-fit: contain;
+  width: 45px;
+  height: 45px;
 }
 
 .add-pic {
@@ -84,8 +80,6 @@ body {
   height: 100px;
   border-radius: 50%;
   cursor: pointer;
-  aspect-ratio: 3/3;
-  object-fit: contain;
 }
 
 .user-card {

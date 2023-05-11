@@ -22,7 +22,7 @@ const UserProfile = ({ user, fetchUserDetails, setActive }) => {
             <>
               <div className="my-2 dp mx-auto">
                 <img
-                  src={`${imageAsset ? imageAsset : profile}`}
+                  src={`${imageAsset || profile}`}
                   alt="profile"
                   className="dp"
                 />
@@ -58,7 +58,7 @@ const UserProfile = ({ user, fetchUserDetails, setActive }) => {
             <>
               <div className="my-2 dp mx-auto">
                 <img
-                  src={`${imageAsset ? imageAsset : profile}`}
+                  src={`${imageAsset || profile}`}
                   alt="profile"
                   className="dp"
                 />
@@ -66,7 +66,7 @@ const UserProfile = ({ user, fetchUserDetails, setActive }) => {
               <div className="text-center mt-2">
                 <p className="mb-2 fw-bold">Name :</p>
                 <h4 className="text-center text-capitalize">
-                  {userName ? userName : user?.displayName}
+                  {userName || user?.displayName}
                 </h4>
               </div>
               <div>

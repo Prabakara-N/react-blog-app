@@ -16,7 +16,6 @@ import TagBlog from "./pages/TagBlog";
 import CategoryBlog from "./pages/CategoryBlog";
 import AddProfile from "./pages/AddProfile";
 import UserProfile from "./pages/UserInfo";
-
 // components
 import Header from "./components/Header";
 import ScrollToTop from "./components/ScrollToTop";
@@ -66,14 +65,12 @@ const App = () => {
         const userData = doc.data();
         if (userData) {
           setUserId(userData.userId);
-          setUserName(
-            userData.userName ? userData.userName : user?.displayName
-          );
+          setUserName(userData.userName || user?.displayName);
           setImageAsset(userData.image);
           setEmail(userData.email);
           setBio(userData.bio);
         }
-        return doc.id;
+        return doc;
       });
     }
   };
