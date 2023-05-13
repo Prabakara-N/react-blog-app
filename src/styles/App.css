@@ -57,6 +57,13 @@ body {
   pointer-events: none;
 }
 
+.pass-abs {
+  position: absolute;
+  cursor: pointer;
+  bottom: 28px;
+  right: 28px;
+}
+
 .profile-img-header {
   width: 30px;
   height: 30px;

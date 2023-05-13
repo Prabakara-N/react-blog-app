@@ -8,6 +8,7 @@ import {
 import { auth } from "../firebase/firebase";
 import { toast } from "react-toastify";
 import { UserInfo } from "../context/UserInfoContext";
+import { VscEye, VscEyeClosed } from "react-icons/vsc";
 
 const initialState = {
   firstName: "",
@@ -20,6 +21,8 @@ const initialState = {
 const Auth = ({ setActive, setUser }) => {
   const [state, setState] = useState(initialState);
   const [signUp, setSignUp] = useState(false);
+  const [isEyeOpen, setIsEyeOpen] = useState(false);
+  const [isCEyeOpen, setIsCEyeOpen] = useState(false);
   const [error, setError] = useState("");
 
   const { firstName, lastName, email, password, confirmPassword } = state;
@@ -138,26 +141,38 @@ const Auth = ({ setActive, setUser }) => {
                   onChange={handleChange}
                 />
               </div>
-              <div className="col-12 py-3">
+              <div className="col-12 py-3 position-relative">
                 <input
-                  type="password"
+                  type={isEyeOpen ? "text" : "password"}
                   className="form-control input-text-box"
                   placeholder="Password"
                   name="password"
                   value={password}
                   onChange={handleChange}
                 />
+                <div
+                  className="pass-abs"
+                  onClick={() => setIsEyeOpen(!isEyeOpen)}
+                >
+                  {isEyeOpen ? <VscEye /> : <VscEyeClosed />}
+                </div>
               </div>
               {signUp && (
-                <div className="col-12 py-3">
+                <div className="col-12 py-3 position-relative">
                   <input
-                    type="password"
+                    type={isCEyeOpen ? "text" : "password"}
                     className="form-control input-text-box"
                     placeholder="Confirm Password"
                     name="confirmPassword"
                     value={confirmPassword}
                     onChange={handleChange}
                   />
+                  <div
+                    className="pass-abs"
+                    onClick={() => setIsCEyeOpen(!isCEyeOpen)}
+                  >
+                    {isCEyeOpen ? <VscEye /> : <VscEyeClosed />}
+                  </div>
                 </div>
               )}
 
