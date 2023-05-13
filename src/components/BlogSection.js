@@ -71,10 +71,7 @@ const BlogSection = ({
                       style={{
                         cursor: "pointer",
                       }}
-                      onClick={() => {
-                        setShow(true);
-                        setIsOpen(false);
-                      }}
+                      onClick={() => setShow(true)}
                     >
                       <MdDelete className="trash" />
                       Delete
