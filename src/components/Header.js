@@ -67,9 +67,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                   </Link>
                 ) : (
                   <li
-                    className={`nav-item nav-link fw-semibold ${
-                      active === "create" ? "active" : ""
-                    }`}
+                    className={`nav-item nav-link fw-semibold`}
                     onClick={() => {
                       toast.error("Please log-in to create your blog");
                       navigate("/auth");
